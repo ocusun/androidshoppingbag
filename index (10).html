@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안드로이드는 쇼핑백을 든다 — 연재</title>
+
+<!-- Gumroad Overlay (사이트 안에서 결제 팝업) -->
+<script src="https://gumroad.com/js/gumroad.js"></script>
+
+<!-- Pretendard: 부드러운 한국어 UI 서체 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
+<!-- Gowun Batang(헤드라인), Nanum Myeongjo(본문 읽기) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #fbfaf6;
+    --bg-soft: #f5f3ed;
+    --card: #ffffff;
+    --ink: #1a1a1f;
+    --ink-soft: #51525c;
+    --ink-faint: #9b9ba4;
+    --line: #ece9e1;
+
+    /* 파스텔 5색 */
+    --c1: #ff7a8a;  /* 코랄 */
+    --c2: #5eead4;  /* 민트 */
+    --c3: #a78bfa;  /* 라벤더 */
+    --c4: #fdba74;  /* 피치 */
+    --c5: #7dd3fc;  /* 스카이 */
+
+    --ui: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --serif: 'Gowun Batang', serif;
+    --read: 'Nanum Myeongjo', serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--ui);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  /* 컬러풀한 배경 블롭들 — 부드럽고 흩뿌려진 느낌 */
+  .blob { position:fixed; border-radius:50%; filter:blur(80px); opacity:0.45; z-index:0; pointer-events:none; }
+  .blob.b1 { width:380px; height:380px; top:-100px; right:-80px; background:var(--c1); }
+  .blob.b2 { width:300px; height:300px; top:30%; left:-120px; background:var(--c3); opacity:0.3; }
+  .blob.b3 { width:280px; height:280px; bottom:10%; right:-60px; background:var(--c2); opacity:0.32; }
+  .blob.b4 { width:240px; height:240px; bottom:30%; left:10%; background:var(--c4); opacity:0.22; }
+
+  .wrap { max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+
+  /* ===== 헤더 ===== */
+  header {
+    position:sticky; top:0; z-index:50;
+    background: rgba(251,250,246,0.78); backdrop-filter: blur(18px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav { display:flex; align-items:center; justify-content:space-between; height:68px; }
+  .logo { font-family:var(--serif); font-weight:700; font-size:1.15rem; letter-spacing:-0.01em; }
+  .logo .pt { background:linear-gradient(135deg,var(--c1),var(--c3) 60%,var(--c5)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .nav-links { display:flex; gap:28px; }
+  .nav-links a { color:var(--ink-soft); text-decoration:none; font-weight:500; font-size:0.92rem; transition:color .2s; }
+  .nav-links a:hover { color:var(--ink); }
+  @media (max-width:600px){ .nav-links{gap:18px;} .nav-links a{font-size:0.85rem;} }
+
+  /* ===== 히어로 ===== */
+  .hero { padding: 88px 0 50px; text-align:left; }
+  .hero .kicker {
+    display:inline-block; font-size:0.75rem; font-weight:600; letter-spacing:0.16em;
+    color:var(--ink-soft); text-transform:uppercase;
+    background:var(--bg-soft); padding:7px 16px; border-radius:100px;
+    margin-bottom:30px; opacity:0; animation:up .8s .05s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-weight:700;
+    font-size: clamp(2.6rem, 7.5vw, 4.8rem);
+    line-height: 1.15; letter-spacing:-0.02em;
+    margin-bottom: 26px; max-width:14ch;
+    opacity:0; animation:up .8s .2s forwards;
+  }
+  .hero h1 .hl {
+    background: linear-gradient(120deg, var(--c1) 0%, var(--c4) 50%, var(--c3) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero .logline {
+    font-size:1.12rem; color:var(--ink-soft); max-width:540px;
+    margin-bottom:38px; line-height:1.75;
+    opacity:0; animation:up .8s .35s forwards;
+  }
+  .hero .meta { display:flex; gap:32px; flex-wrap:wrap; font-size:0.85rem; color:var(--ink-faint);
+    opacity:0; animation:up .8s .5s forwards; }
+  .hero .meta b { display:block; color:var(--ink); font-weight:600; font-size:0.95rem; margin-top:4px; }
+  @keyframes up { to { opacity:1; transform:translateY(0);} }
+  .hero .kicker, .hero h1, .hero .logline, .hero .meta { transform:translateY(20px); }
+
+  /* ===== 섹션 헤딩 ===== */
+  section { padding: 60px 0; position:relative; }
+  .s-head { display:flex; align-items:baseline; gap:14px; margin-bottom:8px; }
+  .s-num { font-size:0.78rem; font-weight:600; letter-spacing:0.12em; color:var(--ink-faint); }
+  .s-title { font-family: var(--serif); font-weight:700; font-size:1.7rem; letter-spacing:-0.01em; }
+  .s-sub { color:var(--ink-faint); font-size:0.92rem; margin-bottom:34px; }
+
+  /* ===== 회차 카드 ===== */
+  .ep {
+    display:flex; align-items:center; gap:20px;
+    padding:22px 26px; background:var(--card); border:1px solid var(--line);
+    border-radius:20px; margin-bottom:12px; text-decoration:none; color:inherit;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+    position:relative; overflow:hidden;
+  }
+  .ep::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:5px;
+    background: var(--ep-color, var(--c1)); transition: width .25s;
+  }
+  .ep:hover { transform: translateY(-3px); box-shadow: 0 14px 36px -14px rgba(0,0,0,0.08); border-color:transparent; }
+  .ep:hover::before { width:8px; }
+  .ep-num {
+    font-family:var(--serif); font-weight:700; font-size:1.5rem;
+    color: var(--ep-color, var(--c1));
+    min-width:52px; padding-left:8px;
+  }
+  .ep-body { flex:1; min-width:0; }
+  .ep-title { font-family:var(--serif); font-weight:700; font-size:1.12rem; margin-bottom:4px; letter-spacing:-0.005em; }
+  .ep-desc { color:var(--ink-soft); font-size:0.92rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ep-tag {
+    font-size:0.74rem; font-weight:600; letter-spacing:0.04em;
+    padding:6px 14px; border-radius:100px; white-space:nowrap;
+  }
+  .ep-tag.free { color:#0a8062; background:#d7f5ec; }
+  .ep-tag.paid { color:#fff; background: var(--ep-color, var(--c1)); }
+  @media (max-width:560px){
+    .ep{ gap:12px; padding:16px 18px; }
+    .ep-num{ font-size:1.1rem; min-width:32px; padding-left:4px; }
+    .ep-desc{ display:none; }
+  }
+
+  /* ===== 이용권 ===== */
+  .bundles { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; }
+  .bundle {
+    background:var(--card); border:1px solid var(--line); border-radius:24px;
+    padding:32px 26px; text-align:center; position:relative;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .bundle:hover { transform: translateY(-5px); box-shadow: 0 20px 42px -18px rgba(0,0,0,0.1); }
+  .bundle.best {
+    background: linear-gradient(180deg, #fff 0%, #fffbf6 100%);
+    border-color: transparent;
+    box-shadow: 0 0 0 1.5px var(--c4) inset, 0 12px 30px -14px rgba(253,186,116,0.4);
+  }
+  .bundle.best::after {
+    content:'BEST'; position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    font-weight:700; font-size:0.68rem; letter-spacing:0.16em; color:#fff;
+    background: linear-gradient(135deg, var(--c4), var(--c1));
+    padding:6px 16px; border-radius:100px;
+  }
+  .b-name { font-weight:600; font-size:1.05rem; margin-bottom:14px; color:var(--ink-soft); }
+  .b-price { font-family:var(--serif); font-weight:700; font-size:2.2rem; letter-spacing:-0.02em; margin-bottom:6px; }
+  .b-price small { font-size:0.95rem; color:var(--ink-faint); font-weight:400; }
+  .b-note { color:var(--ink-faint); font-size:0.85rem; margin-bottom:24px; }
+  .btn-buy {
+    display:block; font-weight:600; font-size:0.95rem; color:#fff;
+    background:var(--ink); padding:14px; border-radius:100px;
+    text-decoration:none; transition: background .2s, transform .2s;
+  }
+  .bundle.best .btn-buy { background: linear-gradient(135deg, var(--c4), var(--c1)); }
+  .btn-buy:hover { transform: scale(1.02); }
+
+  /* ===== 인물 ===== */
+  .chars { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
+  .char {
+    background:var(--card); border:1px solid var(--line); border-radius:22px;
+    padding:26px 24px; transition: transform .25s;
+  }
+  .char:hover { transform: translateY(-3px); }
+  .c-avatar {
+    width:56px; height:56px; border-radius:18px; margin-bottom:18px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-weight:700; font-size:1.4rem; color:#fff;
+    background: var(--c-color, var(--c1));
+  }
+  .c-name { font-family:var(--serif); font-weight:700; font-size:1.1rem; margin-bottom:6px; }
+  .c-role {
+    color: var(--c-color, var(--c1));
+    font-size:0.74rem; font-weight:600; letter-spacing:0.08em;
+    margin-bottom:12px; text-transform:uppercase;
+  }
+  .c-desc { color:var(--ink-soft); font-size:0.9rem; line-height:1.65; }
+
+  /* ===== 푸터 ===== */
+  footer { border-top:1px solid var(--line); padding:38px 0; text-align:center; color:var(--ink-faint); font-size:0.85rem; }
+  footer a { color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); }
+  .note { margin-top:36px; padding:20px 24px; border-radius:16px; background:var(--bg-soft); color:var(--ink-soft); font-size:0.88rem; line-height:1.7; }
+  .note code { font-family:'SF Mono', Menlo, monospace; color:var(--c3); background:rgba(167,139,250,0.12); padding:2px 7px; border-radius:5px; font-size:0.82rem; }
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">안드로이드<span class="pt">.</span></div>
+    <nav class="nav-links">
+      <a href="#episodes">연재</a>
+      <a href="#bundles">이용권</a>
+      <a href="#characters">인물</a>
+      <a href="treatment.html">영상화</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <span class="kicker">근미래 AI · 자본주의 풍자</span>
+  <h1>안드로이드는<br><span class="hl">쇼핑백</span>을 든다</h1>
+  <p class="logline">5억 원짜리 카드, 1년의 시간, 그리고 인간의 욕망을 학습하는 초지능 안드로이드. 평범한 직장인 성훈에게 자본주의의 신이 건넨, 1년짜리 영혼의 임대 계약.</p>
+  <div class="meta">
+    <span>장르<b>근미래 AI · 풍자</b></span>
+    <span>연재<b>매주 금요일</b></span>
+    <span>저자<b>조일출</b></span>
+  </div>
+</div>
+
+<section id="episodes" class="wrap">
+  <div class="s-head"><span class="s-num">01</span><h2 class="s-title">회차</h2></div>
+  <p class="s-sub">프롤로그와 1~2화는 무료입니다. 이후 회차는 이용권으로 열람하세요.</p>
+
+  <a class="ep" href="prologue.html" style="--ep-color:var(--c4)">
+    <span class="ep-num">00</span>
+    <div class="ep-body"><div class="ep-title">Prologue. 깜부치킨의 기적</div><div class="ep-desc">강남 치킨집에 모인 재계 거인들, 그리고 초지능 Y-143의 등장.</div></div>
+    <span class="ep-tag free">무료</span>
+  </a>
+  <a class="ep" href="ep1.html" style="--ep-color:var(--c1)">
+    <span class="ep-num">01</span>
+    <div class="ep-body"><div class="ep-title">30만 원 식권</div><div class="ep-desc">5억 한도의 NVIDIA BLACK 카드를 쥔 성훈의 첫 번째 소비.</div></div>
+    <span class="ep-tag free">무료</span>
+  </a>
+  <a class="ep" href="ep2.html" style="--ep-color:var(--c3)">
+    <span class="ep-num">02</span>
+    <div class="ep-body"><div class="ep-title">265만 원짜리 결계</div><div class="ep-desc">도연이 그려주는, 잃어버린 욕망의 지도.</div></div>
+    <span class="ep-tag free">무료</span>
+  </a>
+
+  <!-- 유료 회차: Gumroad 결제 팝업 — https://여기.gumroad.com/l/상품코드 만 교체 -->
+  <a class="ep gumroad-button" href="https://여기.gumroad.com/l/android03?wanted=true" style="--ep-color:var(--c2)">
+    <span class="ep-num">03</span>
+    <div class="ep-body"><div class="ep-title">한강 View</div><div class="ep-desc">결제 후 열람할 수 있는 회차입니다.</div></div>
+    <span class="ep-tag paid">🔒 1,000원</span>
+  </a>
+  <a class="ep gumroad-button" href="https://여기.gumroad.com/l/android04?wanted=true" style="--ep-color:var(--c5)">
+    <span class="ep-num">04</span>
+    <div class="ep-body"><div class="ep-title">침묵의 국정감사</div><div class="ep-desc">결제 후 열람할 수 있는 회차입니다.</div></div>
+    <span class="ep-tag paid">🔒 1,000원</span>
+  </a>
+</section>
+
+<section id="bundles" class="wrap">
+  <div class="s-head"><span class="s-num">02</span><h2 class="s-title">이용권</h2></div>
+  <p class="s-sub">묶음으로 구매하면 더 저렴합니다. 충전하듯 미리 열람권을 확보하세요.</p>
+  <div class="bundles">
+    <div class="bundle">
+      <div class="b-name">단편 이용권</div>
+      <div class="b-price">1,000<small>원</small></div>
+      <div class="b-note">회차 1편 열람</div>
+      <a class="btn-buy gumroad-button" href="https://여기.gumroad.com/l/android-single?wanted=true">구매하기</a>
+    </div>
+    <div class="bundle best">
+      <div class="b-name">10화 이용권</div>
+      <div class="b-price">8,000<small>원</small></div>
+      <div class="b-note">회차 10편 · 20% 할인</div>
+      <a class="btn-buy gumroad-button" href="https://여기.gumroad.com/l/android-pack10?wanted=true">구매하기</a>
+    </div>
+    <div class="bundle">
+      <div class="b-name">완결 패스</div>
+      <div class="b-price">19,000<small>원</small></div>
+      <div class="b-note">완결까지 모든 회차</div>
+      <a class="btn-buy gumroad-button" href="https://여기.gumroad.com/l/android-allpass?wanted=true">구매하기</a>
+    </div>
+  </div>
+  <div class="note">
+    <b>💡 적용 방법</b> — "이용권"은 실제 코인이 아니라 <b>Gumroad 묶음 상품</b>입니다. 각 버튼의
+    <code>https://여기.gumroad.com/l/상품코드</code> 부분을 Gumroad 실제 상품 링크로 바꾸세요.
+    <code>?wanted=true</code> 와 <code>class="gumroad-button"</code> 는 그대로 두면 사이트 안에서 결제창이 팝업으로 뜹니다.
+  </div>
+</section>
+
+<section id="characters" class="wrap">
+  <div class="s-head"><span class="s-num">03</span><h2 class="s-title">등장인물</h2></div>
+  <p class="s-sub">무료 공개 — 마케팅·IP 자료로 활용하세요.</p>
+  <div class="chars">
+    <div class="char" style="--c-color:var(--c1)">
+      <div class="c-avatar">성</div><div class="c-name">김성훈</div><div class="c-role">Protagonist</div>
+      <div class="c-desc">42세, 미래전략협회 기획팀장. 6천 원 식권에 목매던 그에게 5억의 카드가 쥐어진다.</div>
+    </div>
+    <div class="char" style="--c-color:var(--c3)">
+      <div class="c-avatar">도</div><div class="c-name">도연</div><div class="c-role">Android · Y-143</div>
+      <div class="c-desc">인간의 모순된 욕망까지 이해하는 초지능. 1년간 성훈의 욕망의 지도를 다시 그린다.</div>
+    </div>
+    <div class="char" style="--c-color:var(--c5)">
+      <div class="c-avatar">황</div><div class="c-name">존슨 황</div><div class="c-role">Antagonist</div>
+      <div class="c-desc">엠비디아의 수장. 인류의 미래를 건 베타 테스트를 설계한 자.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 2025 조일출 · 안드로이드는 쇼핑백을 든다 · 무단 전재와 복제 금지 ·
+    <a href="#">문의</a> · <a href="#">IP 제휴 제안</a>
+  </div>
+</footer>
+
+</body>
+</html>

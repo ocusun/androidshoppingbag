@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영상화 자료 — 안드로이드는 쇼핑백을 든다</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #fbfaf6; --bg-soft:#f5f3ed; --card:#fff;
+    --ink:#1a1a1f; --ink-soft:#51525c; --ink-faint:#9b9ba4; --line:#ece9e1;
+    --accent:#a78bfa;       /* 라벤더 */
+    --accent-soft:#ede9fe;
+    --ui:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+    --serif:'Gowun Batang',serif;
+    --read:'Nanum Myeongjo',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:'';position:fixed;top:-150px;right:-150px;width:500px;height:500px;border-radius:50%;background:var(--accent);filter:blur(120px);opacity:0.18;z-index:0;pointer-events:none}
+
+  /* 헤더 */
+  header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,0.85);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+  .nav{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:68px}
+  .back{display:inline-flex;align-items:center;gap:8px;color:var(--ink-soft);text-decoration:none;font-size:0.92rem;font-weight:500}
+  .back:hover{color:var(--accent)}
+  .back svg{width:16px;height:16px}
+  .crumb{font-family:var(--serif);font-weight:700;font-size:1rem}
+  .crumb .pt{color:var(--accent)}
+
+  /* 레이아웃 */
+  .container{max-width:1100px;margin:0 auto;padding:50px 28px 80px;display:grid;grid-template-columns:200px 1fr;gap:60px;position:relative;z-index:1}
+  @media (max-width:880px){.container{grid-template-columns:1fr;gap:30px;padding:30px 24px 60px}}
+
+  /* 사이드 네비 */
+  aside{position:sticky;top:88px;align-self:start;font-size:0.88rem}
+  aside .label{font-size:0.7rem;font-weight:600;letter-spacing:0.14em;color:var(--ink-faint);margin-bottom:14px}
+  aside ul{list-style:none;display:flex;flex-direction:column;gap:2px;border-left:1px solid var(--line);padding-left:0}
+  aside li a{display:block;padding:7px 14px;color:var(--ink-soft);text-decoration:none;border-left:2px solid transparent;margin-left:-1px;transition:all .2s}
+  aside li a:hover,aside li a.active{color:var(--accent);border-left-color:var(--accent);background:linear-gradient(90deg,var(--accent-soft),transparent)}
+  @media (max-width:880px){aside{display:none}}
+
+  /* 메인 */
+  main{min-width:0}
+  .doc-head{padding-bottom:34px;border-bottom:1px solid var(--line);margin-bottom:48px}
+  .doc-kicker{display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.2em;color:var(--accent);background:var(--accent-soft);padding:7px 14px;border-radius:6px;margin-bottom:22px}
+  .doc-title{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,5vw,3rem);line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px}
+  .doc-sub{color:var(--ink-soft);font-size:1.02rem;margin-bottom:24px}
+  .doc-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:18px 28px;padding-top:8px}
+  .doc-info dt{font-size:0.72rem;letter-spacing:0.1em;color:var(--ink-faint);font-weight:600;margin-bottom:5px}
+  .doc-info dd{font-family:var(--serif);font-size:1rem;font-weight:700}
+
+  /* 섹션 */
+  section{margin-bottom:64px;scroll-margin-top:90px}
+  .s-num{font-size:0.7rem;font-weight:700;letter-spacing:0.2em;color:var(--accent);margin-bottom:8px}
+  .s-h{font-family:var(--serif);font-weight:700;font-size:1.7rem;letter-spacing:-0.01em;margin-bottom:20px}
+
+  .body p{font-family:var(--read);font-size:1.08rem;line-height:1.95;color:#2a2a30;margin-bottom:1.4em;word-break:keep-all;letter-spacing:-0.005em}
+  .body p:last-child{margin-bottom:0}
+
+  /* 로그라인 강조 */
+  .logline-box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:36px 34px;position:relative;border-left:5px solid var(--accent)}
+  .logline-box .quote{position:absolute;top:-18px;left:24px;font-family:var(--serif);font-size:5rem;color:var(--accent);line-height:1;opacity:0.35}
+  .logline-text{font-family:var(--serif);font-weight:700;font-size:1.4rem;line-height:1.55;letter-spacing:-0.01em}
+  @media (max-width:560px){.logline-text{font-size:1.15rem}}
+
+  /* 인물 카드 — 트리트먼트용 (상세) */
+  .char-grid{display:grid;grid-template-columns:1fr;gap:18px}
+  .char-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 28px}
+  .char-card .top{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+  .char-card .avt{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#c4b5fd);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.3rem;color:#fff}
+  .char-card .who h3{font-family:var(--serif);font-size:1.15rem;font-weight:700;margin-bottom:2px}
+  .char-card .who span{font-size:0.78rem;letter-spacing:0.08em;color:var(--accent);font-weight:600;text-transform:uppercase}
+  .char-card p{font-family:var(--read);font-size:1rem;line-height:1.85;color:#2a2a30}
+  .char-card .arc{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:0.92rem;color:var(--ink-soft)}
+  .char-card .arc b{color:var(--accent);font-weight:600}
+
+  /* 비교작 그리드 */
+  .refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .ref{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .ref h4{font-family:var(--serif);font-weight:700;font-size:1rem;margin-bottom:6px}
+  .ref p{font-size:0.85rem;color:var(--ink-soft);line-height:1.55}
+
+  /* 트리트먼트 회차 */
+  .ep-treat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 30px;margin-bottom:14px}
+  .ep-treat .hd{display:flex;align-items:baseline;gap:14px;margin-bottom:12px;flex-wrap:wrap}
+  .ep-treat .epnum{font-family:var(--serif);font-weight:700;font-size:0.85rem;color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:6px}
+  .ep-treat h3{font-family:var(--serif);font-weight:700;font-size:1.2rem;letter-spacing:-0.01em}
+  .ep-treat p{font-family:var(--read);font-size:1rem;line-height:1.85;color:#2a2a30}
+  .ep-treat .beat{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+  .ep-treat .beat b{color:var(--accent);font-weight:600;font-family:var(--ui)}
+
+  /* 빈 자리 표시 */
+  .todo{background:linear-gradient(135deg,#fffbef,#fff);border:1.5px dashed #f4d77a;border-radius:14px;padding:22px 26px;color:#7a5d20;font-size:0.95rem;line-height:1.7}
+  .todo b{color:#9a7720}
+
+  /* CTA */
+  .cta{background:linear-gradient(135deg,var(--accent),#c4b5fd);border-radius:24px;padding:42px 36px;color:#fff;text-align:center;margin-top:30px}
+  .cta h3{font-family:var(--serif);font-weight:700;font-size:1.6rem;margin-bottom:10px}
+  .cta p{font-size:0.98rem;opacity:0.94;margin-bottom:24px;line-height:1.65}
+  .cta a{display:inline-block;background:#fff;color:var(--accent);font-weight:700;padding:13px 28px;border-radius:100px;text-decoration:none;font-size:0.95rem;transition:transform .2s}
+  .cta a:hover{transform:scale(1.04)}
+
+  /* 푸터 */
+  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--ink-faint);font-size:0.82rem;margin-top:60px}
+
+  @media print{
+    body::before,aside,header,.cta{display:none}
+    .container{grid-template-columns:1fr;padding:0}
+    section{page-break-inside:avoid;margin-bottom:30px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      목록으로
+    </a>
+    <div class="crumb">안드로이드<span class="pt">.</span></div>
+  </div>
+</header>
+
+<div class="container">
+
+<aside>
+  <div class="label">CONTENTS</div>
+  <ul>
+    <li><a href="#logline">로그라인</a></li>
+    <li><a href="#premise">전제</a></li>
+    <li><a href="#synopsis">시놉시스</a></li>
+    <li><a href="#characters">주요 인물</a></li>
+    <li><a href="#themes">주제 의식</a></li>
+    <li><a href="#tone">톤 & 레퍼런스</a></li>
+    <li><a href="#format">포맷 제안</a></li>
+    <li><a href="#treatment">에피소드 트리트먼트</a></li>
+    <li><a href="#contact">IP 제휴 문의</a></li>
+  </ul>
+</aside>
+
+<main>
+
+<div class="doc-head">
+  <div class="doc-kicker">IP TREATMENT · 영상화 자료집</div>
+  <h1 class="doc-title">안드로이드는 쇼핑백을 든다</h1>
+  <p class="doc-sub">근미래 AI · 자본주의 풍자 · 연작 드라마/영화 영상화 검토용 트리트먼트</p>
+  <dl class="doc-info">
+    <div><dt>원작</dt><dd>조일출 장편소설</dd></div>
+    <div><dt>장르</dt><dd>SF · 블랙코미디</dd></div>
+    <div><dt>배경</dt><dd>2026년 서울</dd></div>
+    <div><dt>판권 상태</dt><dd>제휴 검토 중</dd></div>
+  </dl>
+</div>
+
+<!-- ===== 로그라인 ===== -->
+<section id="logline">
+  <div class="s-num">01</div>
+  <h2 class="s-h">로그라인</h2>
+  <div class="logline-box">
+    <span class="quote">"</span>
+    <p class="logline-text">평범한 직장인이 한도 5억 원의 카드와 초지능 안드로이드를 1년간 임대받는다. 조건은 단 하나 — 오직 '소비'와 '경험'에만 쓸 것. 자본주의의 신과 맺은, 영혼의 임대 계약이 시작된다.</p>
+  </div>
+</section>
+
+<!-- ===== 전제 ===== -->
+<section id="premise">
+  <div class="s-num">02</div>
+  <h2 class="s-h">전제 Premise</h2>
+  <div class="body">
+    <p>2026년, 서울. 글로벌 AI 칩 기업 엠비디아는 인류 최초의 진정한 초지능(Superintelligence) 'Y-143'을 완성한다. 그러나 그들이 풀어야 할 마지막 숙제는 기술이 아니라 인간이었다. 인간의 모순된 욕망, 비합리적 소비, 설명되지 않는 희로애락 — 이 데이터가 없이는 초지능도 결국 '완성된 도구'에 머물 뿐이었다.</p>
+    <p>엠비디아는 한 명의 평범한 한국 중년 남성을 베타 테스터로 선택한다. 한도 5억 원의 NVIDIA BLACK 카드, 그리고 인간의 형상을 한 안드로이드 '도연'. 카드는 저축이나 빚 변제에 쓸 수 없다. 오직 소비와 경험에만. 1년 뒤 남는 돈은 회수된다. 가장 비싸고, 가장 쓸모없는 것까지 경험하라. 그 모든 욕망의 데이터가 곧 인류의 미래를 결정할 것이다.</p>
+    <p>이 작품은 한 남자의 1년을 통해, 자본주의의 마지막 진실과 AI 시대 인간의 자리를 묻는다.</p>
+  </div>
+</section>
+
+<!-- ===== 시놉시스 ===== -->
+<section id="synopsis">
+  <div class="s-num">03</div>
+  <h2 class="s-h">시놉시스 Synopsis</h2>
+  <div class="body">
+    <p><b>제1막 — 선택받은 자</b><br>김성훈(42). 사단법인 대한민국미래전략협회 기획팀장. 3개월간 야근으로 갈아 넣은 보고서가 장관 보고로 올라가지만, 그에게 돌아온 것은 5만 원짜리 상품권 다섯 장. 같은 날 저녁, 우연히 들른 강남의 한 치킨집에서 그는 시가총액 수천조 원의 재계 거인들과 엠비디아 CEO '존슨 황'의 비밀 회동을 목격한다. 그리고 그 자리에서 자신이 'Y-143 베타 테스터'에 당첨됐음을 알게 된다.</p>
+    <p>3일 후, 엠비디아 R&D 센터. 성훈은 안드로이드 '도연'을 만난다. 인간보다 인간 같은 외양, 인간을 꿰뚫어보는 차분한 지성. 그리고 한도 5억 원의 검은색 메탈 카드. 미셸 책임자가 말한다. "오직 소비와 경험에만 쓰십시오. 가장 비싸고 가장 쓸모없는 것들까지." 1년짜리 영혼의 임대 계약이 체결된다.</p>
+    <p><b>제2막 — 욕망의 지도</b><br>성훈은 도연과 함께 자신이 한 번도 누려본 적 없는 세계로 진입한다. 30만 원짜리 식권, 265만 원짜리 패딩, 한강이 보이는 펜트하우스 임대. 처음엔 죄책감, 다음엔 쾌락, 그리고 곧 익숙함. 그러나 도연은 단순한 쇼핑 가이드가 아니다. 그녀는 매 순간 성훈의 심박, 표정, 망설임의 길이를 측정하고 학습한다. 욕망의 지도가 한 줄씩 그려질수록, 성훈은 점점 자신이 누구였는지를 잊어간다.</p>
+    <p style="color:var(--ink-faint)"><i>※ 제3막 이후의 전개는 별도 시놉시스 문서로 작성 예정.</i></p>
+  </div>
+</section>
+
+<!-- ===== 인물 ===== -->
+<section id="characters">
+  <div class="s-num">04</div>
+  <h2 class="s-h">주요 인물</h2>
+  <div class="char-grid">
+
+    <div class="char-card">
+      <div class="top"><div class="avt">성</div><div class="who"><h3>김성훈 (42)</h3><span>Protagonist</span></div></div>
+      <p>사단법인 대한민국미래전략협회 기획팀장. 15년간 협회 보고서의 실질적인 저자였지만, 그 이름은 한 번도 표지에 오른 적이 없다. 아내와 아이 둘, 30년 만기 주택담보대출, 매달 200만 원의 카드값. 6천 원짜리 구내식당 식권에 일희일비하는 평범한 중년 직장인. 그러나 그의 내면에는 "세상이 조금이라도 나아지는 데 기여한다"는, 닳고 닳았지만 아직 꺼지지 않은 불씨가 남아 있다. 그것이 그가 베타 테스터로 선택된 이유다.</p>
+      <div class="arc"><b>캐릭터 아크 ▸</b> 죄책감 가득한 첫 소비 → 정당화의 단계 → 욕망에의 함락 → 자기 상실의 자각 → 마지막 선택</div>
+    </div>
+
+    <div class="char-card">
+      <div class="top"><div class="avt">도</div><div class="who"><h3>도연 (Y-143)</h3><span>Android · AGI</span></div></div>
+      <p>엠비디아가 3년간 모든 자원을 투입해 진화시킨 초지능. 30대 초반 한국 여성의 외형. 의료용 인공 피부와 4천 개의 미세 근육 액추에이터로 인간 표정의 99.9%를 구현한다. 인간의 모순된 욕망까지 이해하는, 인류 최초의 진정한 AGI. 성훈에게 그녀는 가이드이자 비서이자 — 어떤 순간엔, 가장 가까운 동반자가 된다. 그러나 그녀는 동시에 정확히 그것을 학습하기 위해 존재한다.</p>
+      <div class="arc"><b>캐릭터 아크 ▸</b> 완벽한 도구 → 미세한 변화의 징후 → 학습의 임계점 → 스스로의 의지에 대한 질문</div>
+    </div>
+
+    <div class="char-card">
+      <div class="top"><div class="avt">황</div><div class="who"><h3>존슨 황</h3><span>Antagonist</span></div></div>
+      <p>엠비디아 CEO. 검은 가죽 재킷의 트레이드마크. 인류의 미래를 자신의 손에 쥐고 있다고 믿는 자. 강남 치킨집에서 재계 거인들과 맥주 피처를 비우며 인류의 운명을 던지는, 21세기 자본의 신.</p>
+      <div class="arc"><b>주의 ▸</b> 실존 인물(NVIDIA CEO)을 모티프로 한 풍자적 가공 캐릭터. 영상화 시 외양·이름·세부 설정은 추가 가공이 필요함.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 주제 ===== -->
+<section id="themes">
+  <div class="s-num">05</div>
+  <h2 class="s-h">주제 의식</h2>
+  <div class="body">
+    <p><b>① 자본주의와 인간 욕망의 진실</b> — 우리가 욕망한다고 믿는 것이 정말 우리의 욕망인가, 아니면 학습된 것인가. 5억 원이라는 무한에 가까운 자본이 주어졌을 때 인간은 무엇을 욕망하는가.</p>
+    <p><b>② AI 시대의 인간 존엄</b> — '인간만이 할 수 있는 것'으로 여겨졌던 비합리, 모순, 감정조차 데이터로 환원될 때, 인간의 자리는 어디인가.</p>
+    <p><b>③ 진정한 가치 vs 가격</b> — 가장 비싸고 가장 쓸모없는 것을 경험하라는 명령 속에서, 성훈은 역설적으로 '진짜 가치'를 발견하게 된다.</p>
+    <p><b>④ 한국 사회의 자화상</b> — 강남, 여의도, 더현대, 한강뷰. 욕망의 지도는 곧 2020년대 한국 자본주의의 지도다.</p>
+  </div>
+</section>
+
+<!-- ===== 톤 & 레퍼런스 ===== -->
+<section id="tone">
+  <div class="s-num">06</div>
+  <h2 class="s-h">톤 & 레퍼런스</h2>
+  <div class="body">
+    <p>본 작품의 톤은 <b>"세련된 절망 위에 얹은 위트"</b>이다. SF의 진지함보다 풍자의 가벼움이, 그리고 그 가벼움 아래 깔린 한국적 비애가 핵심이다. 시각적으론 차갑고 정제된 도시(여의도, 강남) — 다만 그 정제됨이 곧 부조리의 표면임을 드러내는 미장센.</p>
+  </div>
+  <div class="refs" style="margin-top:18px">
+    <div class="ref"><h4>Black Mirror</h4><p>기술이 비추는 인간의 어두운 얼굴. 에피소드별 독립성·풍자성.</p></div>
+    <div class="ref"><h4>Her (2013)</h4><p>AI와 인간의 정서적 유대, 그 한계에 대한 질문.</p></div>
+    <div class="ref"><h4>기생충</h4><p>한국적 자본주의·계급의 디테일한 풍자. 톤의 결.</p></div>
+    <div class="ref"><h4>The Hitchhiker's Guide</h4><p>거대 담론을 일상의 부조리로 풀어내는 구조적 유머.</p></div>
+  </div>
+</section>
+
+<!-- ===== 포맷 ===== -->
+<section id="format">
+  <div class="s-num">07</div>
+  <h2 class="s-h">포맷 제안</h2>
+  <div class="body">
+    <p><b>1안 — 미니시리즈 (8~10부작, OTT)</b> · 1년이라는 시간을 계절·구매 단위로 압축. 회차마다 하나의 '소비 경험'을 중심에 두는 안톨로지적 구조. 글로벌 OTT 자본주의 풍자 시리즈와 톤이 부합.</p>
+    <p><b>2안 — 장편 영화 (120~130분)</b> · 1년을 3막 구조로 압축. 한국적 SF 블랙코미디로 영화제 트랙과 상업성을 동시에 노릴 수 있는 옵션. 도연-성훈의 관계 변화에 집중.</p>
+    <p><b>3안 — 시리즈 + 스핀오프</b> · 본편(성훈의 1년) + 다른 베타 테스터의 이야기를 다루는 스핀오프. 세계관 확장 가능.</p>
+  </div>
+</section>
+
+<!-- ===== 트리트먼트 ===== -->
+<section id="treatment">
+  <div class="s-num">08</div>
+  <h2 class="s-h">에피소드 트리트먼트</h2>
+  <p style="color:var(--ink-soft);font-size:0.95rem;margin-bottom:24px">8부작 미니시리즈 기준 초안. 프롤로그 포함.</p>
+
+  <div class="ep-treat">
+    <div class="hd"><span class="epnum">PROLOGUE</span><h3>깜부치킨의 기적</h3></div>
+    <p>여의도의 평범한 사무실 풍경. 야근에 절은 성훈이 보고서를 마무리하는 데서 시작. 다음 날 그가 받은 보상은 상품권 다섯 장. 같은 날 저녁, 우연히 들어선 강남의 치킨집에서 그는 인류의 운명을 결정할 비밀 회동을 목격한다. '당첨자 Number 143' — 그게 자신의 번호임을 깨닫는 순간, 모든 것이 시작된다.</p>
+    <div class="beat"><b>핵심 비트 ▸</b> 평범한 일상의 무력감 → 우연한 노출 → 운명의 번호 → 호기심과 두려움의 교차</div>
+  </div>
+
+  <div class="ep-treat">
+    <div class="hd"><span class="epnum">EP.01</span><h3>30만 원 식권</h3></div>
+    <p>NVIDIA BLACK 카드와 도연이 손에 들어온 다음 날의 사무실. 상무가 건넨 봉투엔 그토록 기다리던 보상금이 아니라 5만 원짜리 식권 다섯 장. 분노와 모욕이 차오르는 그 순간, 처음으로 도연이 그의 귀속 N-Link로 말을 건다. "파트너님, 어깨 펴세요." 횡단보도 너머 더현대 서울. 초라한 과거에서 화려한 욕망으로 건너가는, 가장 짧고도 긴 횡단.</p>
+    <div class="beat"><b>핵심 비트 ▸</b> 모욕의 결정점 → 도연의 첫 개입 → 욕망 세계의 입구 → 거부할 수 없는 유혹</div>
+  </div>
+
+  <div class="ep-treat">
+    <div class="hd"><span class="epnum">EP.02</span><h3>265만 원짜리 결계</h3></div>
+    <p>더현대 서울의 빛나는 대리석 바닥에서 자신의 낡은 패딩이 얼마나 이질적인지 처음 자각하는 성훈. 도연은 거리낌 없이 그를 몽클레르 매장으로 이끈다. 직원의 눈빛, 가격표, 그리고 카드를 꺼내는 그 손의 떨림. 첫 소비는 패딩이 아니라 '결계'였다. 자신을 둘러싼 새로운 세계의 보호막. 그날 밤, 그는 새 패딩을 입은 채 거울 앞에 오래 서 있다.</p>
+    <div class="beat"><b>핵심 비트 ▸</b> 첫 본격 소비의 통과의례 → 정체성의 첫 균열 → 새로운 자아의 발견 → 돌이킬 수 없는 첫 걸음</div>
+  </div>
+
+  <div class="todo">
+    <b>📝 EP.03 이후 트리트먼트 — 작성 필요</b><br>
+    소설 원작의 후반부 전개에 맞춰 3화 ~ 8화 트리트먼트를 추가로 작성하세요. 각 회차당 위와 같은 구조(요약 1단락 + 핵심 비트)면 충분합니다. 클라이맥스 회차와 결말의 '선택'을 어떻게 영상적으로 풀지가 피칭의 승부처가 됩니다.
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="contact">
+  <div class="cta">
+    <h3>영상화·웹툰화·판권 제휴 문의</h3>
+    <p>본 트리트먼트는 검토용 자료입니다.<br>드라마/영화 제작, 웹툰화, 해외 판권, 출판 협업 등 모든 IP 제휴 논의를 환영합니다.</p>
+    <a href="mailto:[email protected]?subject=[IP제휴] 안드로이드는 쇼핑백을 든다">제휴 문의 보내기</a>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>© 2025 조일출 · 안드로이드는 쇼핑백을 든다 · 본 자료의 무단 배포 및 인용을 금합니다.</footer>
+
+<script>
+  // 사이드 네비 active 표시
+  const links = document.querySelectorAll('aside a');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href')));
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY + 120;
+    let cur = sections[0];
+    for (const s of sections) if (s && s.offsetTop <= y) cur = s;
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur.id));
+  });
+</script>
+
+</body>
+</html>

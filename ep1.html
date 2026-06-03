@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제1화 30만 원 식권 — 안드로이드는 쇼핑백을 든다</title>
+<script src="https://gumroad.com/js/gumroad.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf6; --bg-soft: #f5f3ed; --card:#fff;
+    --ink:#1a1a1f; --ink-soft:#51525c; --ink-faint:#9b9ba4; --line:#ece9e1;
+    --accent: #ff7a8a;
+    --ui: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --serif: 'Gowun Batang', serif;
+    --read: 'Nanum Myeongjo', serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:var(--ui); line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+
+  /* 진행도 바 */
+  .progress { position:fixed; top:0; left:0; height:3px; background:var(--accent); z-index:100; width:0%; transition:width .1s; }
+
+  /* 헤더 */
+  header { position:sticky; top:0; z-index:50; background:rgba(251,250,246,0.85); backdrop-filter:blur(18px); border-bottom:1px solid var(--line); }
+  .nav { max-width:760px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .back { display:inline-flex; align-items:center; gap:8px; color:var(--ink-soft); text-decoration:none; font-size:0.9rem; font-weight:500; transition:color .2s; }
+  .back:hover { color:var(--accent); }
+  .back svg { width:16px; height:16px; }
+  .crumb { font-family:var(--serif); font-weight:700; font-size:0.95rem; color:var(--ink); }
+  .crumb .pt { color:var(--accent); }
+
+  /* 본문 */
+  .reader { max-width:680px; margin:0 auto; padding:60px 28px 80px; position:relative; }
+  .ch-head { margin-bottom:56px; }
+  .ch-num { display:inline-block; font-family:var(--serif); font-weight:700; font-size:0.85rem; letter-spacing:0.18em;
+    color:var(--accent); padding:6px 16px; border-radius:100px; background:color-mix(in srgb, var(--accent) 12%, transparent); margin-bottom:24px; }
+  .ch-title { font-family:var(--serif); font-weight:700; font-size:clamp(2rem, 6vw, 3rem); line-height:1.2; letter-spacing:-0.02em; margin-bottom:18px; }
+  .ch-meta { display:flex; gap:18px; color:var(--ink-faint); font-size:0.85rem; }
+  .ch-meta .dot { width:4px; height:4px; border-radius:50%; background:var(--ink-faint); align-self:center; }
+
+  /* 본문 단락 */
+  .body p {
+    font-family: var(--read);
+    font-size: 1.18rem;
+    line-height: 2.0;
+    color: #2a2a30;
+    margin-bottom: 1.6em;
+    text-align: left;
+    word-break: keep-all;
+    letter-spacing: -0.005em;
+  }
+  .body p:first-child::first-letter {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 3.2em;
+    float: left;
+    line-height: 0.88;
+    margin: 0.08em 0.1em 0 0;
+    color: var(--accent);
+  }
+  @media (max-width:560px){ .body p { font-size:1.08rem; line-height:1.95; } }
+
+  /* 회차 끝 */
+  .end-mark { text-align:center; margin:60px 0 50px; font-family:var(--serif); color:var(--ink-faint); letter-spacing:0.5em; font-size:1.2rem; }
+
+  /* 다음/이전 */
+  .pager { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; }
+  .pager a {
+    display:block; padding:22px 24px; background:var(--card); border:1px solid var(--line); border-radius:18px;
+    text-decoration:none; color:inherit; transition: transform .2s, box-shadow .2s;
+  }
+  .pager a:hover { transform:translateY(-2px); box-shadow:0 12px 28px -14px rgba(0,0,0,0.1); }
+  .pager .dir { font-size:0.72rem; color:var(--ink-faint); letter-spacing:0.1em; margin-bottom:6px; font-weight:600; }
+  .pager .ttl { font-family:var(--serif); font-weight:700; font-size:1rem; color:var(--ink); }
+  .pager .right { text-align:right; }
+  .pager .right .dir { color:var(--accent); }
+  .pager .empty { visibility:hidden; }
+  @media (max-width:520px){ .pager{grid-template-columns:1fr;} }
+
+  /* 결제 유도 (다음 화가 유료일 때) */
+  .paywall { background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, white), #fff);
+    border:1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius:22px;
+    padding:34px 28px; text-align:center; margin-bottom:28px; }
+  .paywall .lock { font-size:1.8rem; margin-bottom:10px; }
+  .paywall h3 { font-family:var(--serif); font-weight:700; font-size:1.35rem; margin-bottom:10px; }
+  .paywall p { color:var(--ink-soft); font-size:0.95rem; margin-bottom:22px; line-height:1.65; }
+  .paywall .actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .paywall .btn {
+    display:inline-block; padding:13px 24px; border-radius:100px; text-decoration:none;
+    font-weight:600; font-size:0.92rem; transition: transform .2s;
+  }
+  .paywall .btn-primary { color:#fff; background:var(--accent); }
+  .paywall .btn-secondary { color:var(--ink); background:transparent; border:1px solid var(--line); }
+  .paywall .btn:hover { transform:scale(1.03); }
+
+  /* 푸터 */
+  footer { border-top:1px solid var(--line); padding:30px 0; text-align:center; color:var(--ink-faint); font-size:0.82rem; }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header>
+  <div class="nav">
+    <a class="back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      목록
+    </a>
+    <div class="crumb">안드로이드<span class="pt">.</span></div>
+  </div>
+</header>
+
+<article class="reader">
+  <div class="ch-head">
+    <span class="ch-num">EPISODE 01</span>
+    <h1 class="ch-title">제1화 30만 원 식권</h1>
+    <div class="ch-meta"><span>저자 조일출</span><span class="dot"></span><span>예상 읽기 시간 8분</span></div>
+  </div>
+
+  <div class="body">
+    <p>서울 여의도, (사)대한민국미래전략협회 사무실. 성훈은 자신의 낡은 사무용 의자에 깊숙이 파묻혀 있었다. 재킷 안주머니에는 5억 원의 한도가 장전된 [NVIDIA BLACK] 카드가 마치 뜨거운 석탄처럼 열기를 내뿜고 있었다.</p>
+    <p>&quot;김 팀장, 잠깐 이리 와봐.&quot; 상무의 호출이었다. 성훈은 무거운 몸을 일으켰다. 지난 3개월간 그가 주말도 없이 갈아 넣은 &#x27;국가 미래 전략 보고서&#x27;의 성과를 듣 는 자리였다. 보고서 표지에는 협회장의 이름만 대문짝만하게 박혀 있었지만, 성훈은 그 내용을 채운 것이 자신의 피와 땀임을 알기에 일말의 기대감을 품었다. 상무실에 들어서자, 상무는 이쑤시개로 이를 쑤시며 두툼한 흰색 봉투 하나를 책상 위에 툭 던졌다.</p>
+    <p>&quot;수고했어. 장관님 반응이 아주 좋아. 자네 기획안 덕분에 우 리 협회 위상이 꽤 올라갈 거야.&quot; 성훈의 시선이 봉투에 꽂혔다. 두께가 제법 되었다. &#x27;드디어... 인정받는 건가?&#x27; 심장이 빠르게 뛰었다. 이 정도 두께면 적어도</p>
+    <p>100만 원, 아니 그 이상일 수도 있다. 밀린 대출 이자를 갚고, 오랜만에 소고기라도 사 먹을 수 있을 것이다.</p>
+    <p>&quot;아, 근데 알다시피 이번에 로비 리모델링하느라 예산이 바닥나서 말이야. 현금 보너스는 어렵게 됐어. 대신 이거, 특별히 챙겼으니 팀원들 잘 챙기고.&quot; 성훈은 떨리는 손으로 봉투를 열었다. 빳빳한 종이 뭉치가 손 에 잡혔다. 하지만 세종대왕의 얼굴은 없었다.</p>
+    <p>[구내식당 식권 (6,000원) x 50매] 총액 30만 원. 성훈은 멍하니 식권 뭉치를 내려다보았다. 50장. 그것은 &#x27;앞으로 밖에서 사 먹지 말고 회사 지하에서 주는 밥 먹 고 열심히 일해라&#x27;는 무언의 명령 같았다. 그가 국가를 위해 바 친 지난 시간과 열정이, 고작 두 달 치 점심값으로 환산되어 돌 아왔다.</p>
+    <p>&quot;부족한가? 50장이면 꽤 큰 건데. 거기 된장찌개랑 제육볶음 예술이잖아.&quot; 상무의 뻔뻔한 웃음 뒤로, 성훈의 귓속에서 &#x27;뚝&#x27; 하 고 무언가 끊어지는 소리가 들렸다. 그것은 그가 15년 동안 지 켜온 인내심의 마지막 동아줄이었다. 성훈의 손이 안주머니로 향했다. 차가운 메탈 카드. 그는 깨달 았다. 자신이 견뎌온 것은 가난이 아니라, 자신의 존엄을 6천 원짜리 식권으로 계산하는 이들의 경멸이었다.</p>
+    <p>&quot;상무님.&quot;</p>
+    <p>&quot;왜, 뭐 더 필요한가?&quot;</p>
+    <p>&quot;아니요. 제가 드려야죠.&quot;</p>
+    <p>성훈은 품에서 1년 묵은 사직서를 꺼냈다. 그리고 식권 50장 뭉 치 위에 사직서를 덮어 상무 쪽으로 밀었다.</p>
+    <p>&quot;맛있는 점심은 이 식권으로 상무님이 드시고 건강하세요. 전 이제 제 인생을 다시 설계해봐야 할 것 같아요.&quot;</p>
+    <p>&quot;이... 이봐! 김 팀장! 자네 미쳤어?&quot; 상무의 고함이 등 뒤에서 터졌다. 성훈은 뒤도 돌아보지 않고 사 무실 문을 박차고 나왔다. 쾅- 육중한 철문이 닫히며 사무실의 소 음이 차단되었다. 복도는 고요했다. 그제야 아드레날린이 빠져나가고, 손끝이 덜덜 떨려오기 시작했다. 42세 남자의 객기. 대책 없는 퇴사. 현실의 공 포가 쓰나미처럼 밀려오려던 찰나였다. 성훈은 재킷 안주머니 깊숙한 곳으로 손을 넣었다. 그곳에는 5억짜리 카드와 함께, 연구소에서 지급받은 납작하고 차가운 검 은색 기기가 들어 있었다.</p>
+    <p>[N-Link (Neural Link Device)] 에어팟보다 작고 버튼 하나 없는 매끈한 조약돌 모양의 단말기. 이 것은 도연(Y-143)과 성훈을 연결하는 신경망이자, 성훈의 심박수, 음성, 위치, 주변 상황을 실시간으로 도연에게 전송하는 송신기다. 성훈은 떨리는 손으로 기기를 귀에 꽂고 중앙을 꾹 눌렀다. 웅- 짧고 묵직한 진동.</p>
+    <p>&quot;......도연...&quot; 그가 입을 떼기도 전에, 기기에서 도연의 침착한 목소리가 흘 러나왔다. 스피커가 아닌, 골전도 방식을 통해 귓속으로 직접</p>
+    <p>꽂히는 선명한 음성.</p>
+    <p>[- 파트너님. 심박수 150bpm. 코르티솔 수치 급증. 음성 패 턴 분석 결과 &#x27;극도의 흥분&#x27; 및 &#x27;해방감&#x27;이 감지되었습니다.] &quot;어... 나 저질렀어. 사표 냈다구.&quot;</p>
+    <p>[- 알고 있습니다. 24시간 저와 연결되는 N-Link를 통해 상무와 의 대화 내용을 실시간으로 모니터링했습니다. &#x27;식권 50장&#x27;이라는 키워드에서 파트너님의 감정 임계점이 돌파된 것으로 판독됩니다.] 도연의 목소리에는 일말의 동요도 없었다. 오히려 그 건조함 이 성훈을 진정시켰다.</p>
+    <p>[- 잘하셨습니다. 자신의 존엄을 6천 원으로 계산하는 집단에 머 무르는 것은 인생 낭비입니다. 지금 로비로 내려오세요. 정문 앞에 서 대기 중입니다.] &quot;알았어. 지금 갈게.&quot; 성훈은 엘리베이터에 몸을 실었다. 거울 속에 비친 자신의 얼굴을 보았다. 10년 묵은 체증이 내려간 얼굴, 동시에 벼랑 끝에 선 남자 의 얼굴이었다. 협회 건물 1층 로비. 엘리베이터 문이 열리자, 점심시간을 맞아 쏟아져 나오는 직 장인들로 로비가 북적였다. 낡은 회색 패딩을 입은 성훈은 그 인파 속에 섞여 회전문을 밀고 나갔다. 그때였다. 회전문 바로 앞, 검은색 벤(Van) 한 대가 미끄러지 듯 멈춰 섰다. 그리고 뒷좌석 문이 열리며 한 여성이 내렸다. 도연이었다. 어제 연구소에서의 모습보다 훨씬 더 인간적이고</p>
+    <p>세련된 모습. 짙은 네이비색 트렌치코트를 입고, 명품 선글라스를 머리에 얹은 30대 초반으로 보이는 도회적인 여성. 그녀는 성훈을 발견하자마자, 주변의 시선 따위는 아랑곳하지 않 고 다가와 성훈의 옷매무새를 다듬어주었다. 마치 오랫동안 내조해 온 아내처럼 자연스러운 동작이었다.</p>
+    <p>&quot;고생했어요, 여보.&quot; 성훈이 움찔하며 물러서려 하자, 도연이 귓가에 작게 속삭였 다.</p>
+    <p>&quot;N-Link를 통해 당신의 불안정한 상태를 확인했습니다. 지금 당 신에게 필요한 건 &#x27;실패한 퇴사자&#x27;가 아니라, &#x27;더 좋은 곳을 찾아 떠나는 능력남&#x27;의 이미지입니다. 제 리드에 따르세요.&quot; 도연은 성훈의 팔에 자신의 팔을 감았다. 따뜻했다. 로봇의 팔 이라고는 믿을 수 없는 온기. 지나가던 사람들 중 몇몇이 힐끗거리며 수근거렸다. &#x27;어? 저거 기획팀 김 팀장 아냐? 와... 부인인가? 엄청 미인인데?&#x27; 경멸과 무시가 호기심과 부러움으로 바뀌는 순간이었다. 성훈은 허리를 폈다. 도연이, 아니 인류 최고의 첨단기술이 그를 지탱해주고 있었다.</p>
+    <p>&quot;가시죠.&quot; 도연이 성훈을 이끌었다.</p>
+    <p>&quot;어디로?&quot; &quot;당신의 무너진 자존감을 회복하러요.&quot; 도연의 시선이 길 건너편, 붉은색 철골 구조물이 번쩍이는 [더현대 서울]을 향했다.</p>
+    <p>&quot;식권 50장을 거절한 남자가 입기에, 지금 그 패딩은 너무 가</p>
+    <p>볍거든요.&quot; 성훈은 귀속의 N-Link 단말기를 어루만졌다. 이 작은 기계가 자 신의 모든 비참함을 도연에게 전송했고, 도연은 그것을 완벽한 &#x27;솔 루션&#x27;으로 바꿔서 눈앞에 나타났다.</p>
+    <p>&quot;그래... 가자.&quot; 두 사람은 횡단보도를 건넜다. 초라한 과거(협회)에서 화려한 욕망(백화점)으로 건너가는, 가장 짧고도 긴 횡단이었다.</p>
+  </div>
+
+  <div class="end-mark">· · ·</div>
+
+<div class="pager"><a href="prologue.html"><div class="dir">← 이전화</div><div class="ttl">프롤로그</div></a><a href="ep2.html" class="right"><div class="dir">다음화 →</div><div class="ttl">2화 · 265만 원짜리 결계</div></a></div>
+
+</article>
+
+<footer>© 2025 조일출 · 안드로이드는 쇼핑백을 든다</footer>
+
+<script>
+  // 스크롤 진행도
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    bar.style.width = (scrolled * 100) + '%';
+  });
+</script>
+</body>
+</html>
