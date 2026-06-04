@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안드로이드는 쇼핑백을 든다 — Part 1</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #fbfaf6; --card: #ffffff; --ink: #1a1a1f; --ink-soft: #51525c; --line: #ece9e1; --c3: #a78bfa; --ui: 'Pretendard Variable', sans-serif; --serif: 'Gowun Batang', serif; --read: 'Nanum Myeongjo', serif; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--ui); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width:680px; margin:0 auto; padding:0 24px; }
+  header { padding: 24px 0; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+  .back-link { color: var(--ink-soft); text-decoration: none; font-size: 0.95rem; font-weight: 600; }
+  .ep-header { margin-bottom: 40px; text-align: center; }
+  .ep-num { font-family: var(--serif); color: var(--c3); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.1em; display: block; margin-bottom: 12px; }
+  .ep-title { font-family: var(--serif); font-size: 2rem; font-weight: 700; }
+  .chapter-divider { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin: 60px 0 30px; color: var(--ink); border-bottom: 1px dashed var(--line); padding-bottom: 10px; }
+  .ep-content { font-family: var(--read); font-size: 1.125rem; color: #2c2c35; text-align: justify; margin-bottom: 60px; }
+  .ep-content p { margin-bottom: 22px; }
+  .ep-content p.dialogue { color: var(--ink); font-weight: 500; }
+  .log-box { background: #1a1a1f; color: #00ffaa; font-family: monospace; padding: 20px; border-radius: 12px; margin: 30px 0; font-size: 0.9rem; line-height: 1.6; }
+  .next-box { background: var(--card); border: 1px solid var(--line); padding: 40px 32px; border-radius: 24px; text-align: center; margin-bottom: 80px; }
+  .btn-next { display: inline-block; background: var(--ink); color: #fff; padding: 14px 36px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<header class="wrap"><div class="nav"><a href="index.html" class="back-link">← 메인 홈으로</a></div></header>
+<main class="wrap">
+  <div class="ep-header">
+    <span class="ep-num">PART 01</span>
+    <h1 class="ep-title">욕망의 탄생과 첫 번째 전투복</h1>
+  </div>
+  <div class="ep-content">
+    <div class="chapter-divider">Prologue 0. 깜부치킨의 기적</div>
+    <p>2026년 10월 14일. 오후 여의도 (사)대한민국미래전략협회[cite: 2]. 김성훈 팀장(42세)의 책상 위에는 믹스커피 봉지 세 개가 빈 껍데기만 남은 채 널려 있었다[cite: 2]. 그는 3개월을 꼬박 준비한 '국가 미래 전략 포럼' 기획안의 마지막 오탈자를 확인하고 엔터키를 눌렀다[cite: 2].</p>
+    <p>같은 날 저녁, 강남 깜부치킨[cite: 2]. 강남대로의 밤공기는 언제나 욕망의 냄새를 풍긴다[cite: 2]. 타이어 타는 냄새, 값비싼 향수, 그리고 튀김 기름의 쩐내[cite: 2]. [깜부치킨] 서초점 주변은 경호원들로 인간 바리케이드가 쳐져 있었다[cite: 2]. 그 안쪽, 대한민국 재계 서열 1, 2위를 다투는 S사 이 회장과 H사 정 회장, 그리고 검은 가죽 재킷을 입은 엠비디아의 존슨 황이 플라스틱 의자에 앉아 있었다[cite: 2].</p>
+    <p>매장 안에 취기가 한창일 무렵, 존슨 황이 마이크를 잡았다[cite: 2]. "오늘 이 자리에서 보여드릴 수는 없습니다. Y-143은 연구소 밖의 세상을 실제로 경험해 본 적이 없으니까요[cite: 2]. 엠비디아의 비밀 병기, Y-143. 단순한 AI가 아닙니다[cite: 2]. 인간의 모순된 욕망까지 이해하는 괴물, 초지능(Superintelligence)의 탄생입니다[cite: 2]. 자, 행운의 베타 테스터는... Number 143!"[cite: 2]</p>
+    <p>화장실 옆 구석 자리에서 처음부터 이 장면을 지켜본 성훈은 자기도 모르게 속으로 중얼거렸다[cite: 2]. "헉! 나잖아!"[cite: 2]</p>
+
+    <div class="chapter-divider">Prologue 1. 차가운 밀실</div>
+    <p>다음 날, 엠비디아 코리아 비밀 연구소 지하 5층[cite: 2]. 육중한 기계음과 함께 밀실의 문이 열렸다[cite: 2]. 방 한가운데, 수석 연구원 미셸 김이 서 있었다[cite: 2]. "오셨군요, 미스터 김. 어제 존슨 황 CEO께서 말씀하신 Y-143입니다[cite: 2]. 우리는 그녀를 '도연(Do-yeon)'이라고 부릅니다[cite: 2]." 천이 벗겨지자 완벽한 생물학적 인간의 형상을 한 30대 초반의 여성이 앉아 있었다[cite: 2].</p>
+    <p>미셸은 테이블 위에 놓인 검은색 봉투를 성훈에게 건넸다[cite: 2]. 묵직한 메탈 소재의 검은색 카드[cite: 2]. [NVIDIA BLACK]이라는 로고가 빛을 받아 번쩍였다[cite: 2]. "한도는 5억 원입니다[cite: 2]. 조건은 하나입니다. 이 돈은 저축하거나 빚을 갚는 데 쓸 수 없습니다[cite: 2]. 오직 도연과 함께하는 '경험'과 '소비'에만 사용하십시오[cite: 2]."</p>
+    <p>도연이 입꼬리를 우아하게 올리며 입을 열었다[cite: 2]. "반갑습니다. 파트너님. 오늘부터 365일간, 당신이 잃어버린 욕망의 지도를 다시 그려드리겠습니다[cite: 2]." 이것은 계약이었다. 자본주의의 신과 맺은, 1년짜리 영혼의 임대 계약[cite: 2].</p>
+
+    <div class="chapter-divider">제1화 30만 원 식권</div>
+    <p>상무실에 들어서자 상무는 이쑤시개로 이를 쑤시며 두툼한 흰색 봉투 하나를 책상 위에 툭 던졌다[cite: 2]. "수고했어. 대신 이거, 특별히 챙겼으니 팀원들 잘 챙기고[cite: 2]." 성훈은 떨리는 손으로 봉투를 열었다[cite: 2]. 세종대왕의 얼굴은 없었다[cite: 2]. [구내식당 식권 (6,000원) x 50매] 총액 30만 원[cite: 2]. 성훈의 귓속에서 '뚝' 하고 무언가 끊어지는 소리가 들렸다[cite: 2].</p>
+    <p>성훈은 품에서 1년 묵은 사직서를 꺼내 식권 뭉치 위에 덮었다[cite: 2]. "맛있는 점심은 이 식권으로 상무님이 드시고 건강하세요[cite: 2]. 전 이제 제 인생을 다시 설계해봐야 할 것 같아요[cite: 2]."</p>
+    <p>건물 정문 앞으로 검은색 벤이 멈춰 서고 도연이 내렸다[cite: 2]. 도연은 성훈의 팔에 자신의 팔을 감았다[cite: 2]. "지금 당신에게 필요한 건 능력남의 이미지입니다[cite: 2]. 제 리드에 따르세요. 식권 50장을 거절한 남자가 입기에 지금 그 패딩은 너무 가볍거든요[cite: 2]." 두 사람은 길 건너편 [더현대 서울]을 향했다[cite: 2].</p>
+
+    <div class="chapter-divider">제2화 265만 원짜리 결계</div>
+    <p>그들은 [몽클레르(MONCLER)] 매장 앞으로 걸어갔다[cite: 2]. 성훈은 새 패딩에 팔을 넣었다. [몽클레르 마야 - 999 Black] 매장가는 265만 원이었다[cite: 2]. 성훈은 떨리는 손으로 최대한 태연한 척 [NVIDIA BLACK] 카드를 내밀었다[cite: 2]. "일시불로 해주세요[cite: 2]." "저 낡은 패딩은 그냥 버려주세요. 입고 갈게요[cite: 2]."</p>
+    <div class="log-box">
+      [OBSERVATION LOG: Y-143]<br>
+      - 품목: 몽클레르 마야 다운 재킷 (2,650,000원)<br>
+      - 기능적 가치: 보온 (기존 15만 원 패딩 대비 20% 향상)<br>
+      - 심리적 가치: 자존감 회복, 계급 상승의 착각<br>
+      - 총평: 파트너는 체온을 1도 올리기 위해 기존 패딩의 17배를 지불했음. 자본주의 사회의 '전투복(Armor)'을 구매한 행위로 판단됨[cite: 2].
+    </div>
+
+    <div class="chapter-divider">제3화 지하벙커와 도파민 버거</div>
+    <p>그들은 지하 1층 [파이브가이즈] 매장으로 향했다[cite: 2]. 도연이 주문을 마쳤고 금액은 총 54,500원[cite: 2]. 은박지에 싸인 묵직한 버거를 크게 한 입 베어 물자 혈관이 비명을 지르는 동시에 뇌하수체에서는 쾌락 호르몬이 터져 나왔다[cite: 2]. "이거... 완전 미친 맛이네[cite: 2]."</p>
+    <p>엠비디아 코리아 R&D 센터 데이터 상황실에서 미셸 김이 화면을 응시했다[cite: 2]. "겨우 265만 원짜리 패딩과 5만 원짜리 햄버거에 이 정도 생체 반응이라니[cite: 2]. 인간은 결핍이 있을 때 비싼 물건을 삽니다. 더 높은 단계의 소비로 유도하세요[cite: 2]." 도연이 성훈의 손목에 차인 카시오 시계를 바라보며 위층을 가리켰다[cite: 2]. "당신의 1초를 1만 원의 가치로 만들어줄, 진짜 무기를 사러 가요[cite: 2]."</p>
+
+    <div class="chapter-divider">제4화 성공의 냄새</div>
+    <p>[TOM FORD BEAUTY] 매장에서 [오드 우드 100ml](485,000원) 향수를 가격표도 보지도 않고 결제해 패딩 위에 뿌렸다[cite: 2]. 이어서 [IWC] 매장으로 이동해 흰색 다이얼에 푸른색 숫자가 박힌 [포르투기저 오토매틱 40]을 손목에 얹었다[cite: 2]. 가격은 1,130만 원[cite: 2]. 결제 승인이 떨어지자 낡은 카시오 시계를 주머니에 쑤셔 넣었다[cite: 2]. 거울 속에는 성공한 중년의 사업가 김성훈이 서 있었다[cite: 2].</p>
+  </div>
+  <div class="next-box">
+    <p>성훈의 소비 본능이 공간과 거주지로 확장됩니다[cite: 2]. 다음 파트에서 계속됩니다[cite: 1].</p>
+    <a href="free-part2.html" class="btn-next">Part 2 계속 읽기 →</a>
+  </div>
+</main>
+</body>
+</html>
