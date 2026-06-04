@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>안드로이드는 쇼핑백을 든다 — 작가 조일출</title>
 
+<!-- Gumroad Overlay -->
 <script src="https://gumroad.com/js/gumroad.js"></script>
 
+<!-- 서체 설정 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,20 +55,20 @@
   .btn-secondary { background:var(--card); color:var(--ink); border:1px solid var(--line); }
   .btn:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,0.1); }
 
-  section { padding: 80px 0; }
+  section { padding: 60px 0; }
   .s-head { margin-bottom:40px; }
   .s-title { font-family: var(--serif); font-size: 2rem; margin-bottom:8px; }
   .s-sub { color:var(--ink-faint); }
 
-  .ep { display:flex; align-items:center; gap:20px; padding:24px; background:var(--card); border:1px solid var(--line); border-radius:20px; margin-bottom:12px; text-decoration:none; color:inherit; transition:0.2s; }
-  .ep:hover { border-color:var(--c3); transform:translateX(5px); }
-  .ep-num { font-family:var(--serif); font-size:1.4rem; font-weight:700; color:var(--c3); min-width:40px; }
+  .ep { display:flex; align-items:center; gap:20px; padding:24px; background:var(--card); border:1px solid var(--line); border-radius:20px; margin-bottom:16px; text-decoration:none; color:inherit; transition:0.2s; }
+  .ep:hover { border-color:var(--c3); transform:translateX(5px); box-shadow:0 10px 25px rgba(0,0,0,0.04); }
+  .ep-num { font-family:var(--serif); font-size:1.3rem; font-weight:700; color:var(--ink-faint); min-width:60px; }
   .ep-body { flex:1; }
-  .ep-title { font-weight:700; font-size:1.1rem; margin-bottom:4px; }
-  .ep-desc { color:var(--ink-soft); font-size:0.9rem; }
-  .ep-tag { font-size:0.75rem; font-weight:700; padding:6px 12px; border-radius:100px; }
+  .ep-title { font-family:var(--serif); font-weight:700; font-size:1.2rem; margin-bottom:6px; }
+  .ep-desc { color:var(--ink-soft); font-size:0.92rem; line-height:1.5; }
+  .ep-tag { font-size:0.75rem; font-weight:700; padding:6px 14px; border-radius:100px; }
   .ep-tag.free { background:#e6fffa; color:#2c7a7b; }
-  .ep-tag.paid { background:#f5f3ed; color:var(--ink-soft); }
+  .ep-tag.paid { background:#fbf0f0; color:#b83232; border:1px solid rgba(184,50,50,0.1); }
 
   .bundles { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; }
   .bundle { background:var(--card); border:1px solid var(--line); border-radius:24px; padding:40px 30px; text-align:center; transition:0.3s; }
@@ -85,8 +87,8 @@
   <div class="wrap nav">
     <div class="logo">안드로이드<span>.</span></div>
     <nav class="nav-links">
-      <a href="#episodes">연재 목록</a>
-      <a href="#bundles">이용권</a>
+      <a href="#episodes">무료 연재</a>
+      <a href="#bundles">완결 패스</a>
       <a href="making.html" class="highlight">공동 집필록</a>
     </nav>
   </div>
@@ -95,10 +97,10 @@
 <div class="hero wrap">
   <span class="kicker">근미래 AI · 자본주의 풍자 소설</span>
   <h1>안드로이드는<br><span>쇼핑백</span>을 든다</h1>
-  <p class="logline">6,000원짜리 식권에 존엄을 팔던 김성훈 팀장, 그에게 5억 한도의 카드가 쥐어졌다. 인간의 욕망을 학습하는 안드로이드 '도연'과 함께하는 1년의 기록.</p>
+  <p class="logline">6,000원짜리 식권에 존엄을 저울질당하던 직장인 성훈. 그에게 장전된 5억 한도의 메탈 카드와 욕망을 복사하는 안드로이드가 나타났다.</p>
   
   <div class="btn-group">
-    <a href="#episodes" class="btn btn-primary">첫 회부터 읽기</a>
+    <a href="#episodes" class="btn btn-primary">무료 분량 먼저 읽기</a>
     <a href="https://www.bookk.co.kr/" target="_blank" class="btn btn-secondary">부크크 종이책 구매</a>
   </div>
 </div>
@@ -106,51 +108,71 @@
 <section id="episodes" class="wrap">
   <div class="s-head">
     <h2 class="s-title">연재 목록</h2>
-    <p class="s-sub">전체 분량의 1/3(00~18화)을 무료로 공개합니다. 이후 회차는 이용권으로 열람하세요.</p>
+    <p class="s-sub">본 소설은 총 56화 완결작입니다[cite: 2]. 앞부분 1/3 분량(00~18화)을 4개의 파트로 나누어 전면 무료 공개합니다[cite: 2].</p>
   </div>
 
-  <a class="ep" href="prologue.html">
-    <span class="ep-num">00</span>
-    <div class="ep-body"><div class="ep-title">Prologue. 깜부치킨의 기적</div><div class="ep-desc">여의도 기획팀장 성훈, 억만장자 존슨 황의 비밀 이벤트에 당첨되다.</div></div>
-    <span class="ep-tag free">무료</span>
+  <!-- 파트 1 -->
+  <a class="ep" href="free-part1.html">
+    <span class="ep-num">PART 1</span>
+    <div class="ep-body">
+      <div class="ep-title">욕망의 탄생과 첫 번째 전투복 (00화 ~ 04화)</div>
+      <div class="ep-desc">깜부치킨의 기적과 5억 한도 카드의 등장[cite: 2]. 성훈은 자신의 존엄을 식권으로 계산하는 이들에게 사직서를 던지고 265만 원짜리 명품 패딩과 시계로 외피를 바꾸기 시작한다[cite: 2].</div>
+    </div>
+    <span class="ep-tag free">무료 정주행</span>
   </a>
 
-  <a class="ep" href="ep1.html">
-    <span class="ep-num">01</span>
-    <div class="ep-body"><div class="ep-title">30만 원 식권</div><div class="ep-desc">존엄을 식권으로 계산하는 이들에게 던지는 성훈의 마지막 사직서.</div></div>
-    <span class="ep-tag free">무료</span>
+  <!-- 파트 2 -->
+  <a class="ep" href="free-part2.html">
+    <span class="ep-num">PART 2</span>
+    <div class="ep-body">
+      <div class="ep-title">콘크리트 쇼핑백과 취향의 계급 (05화 ~ 09화)</div>
+      <div class="ep-desc">국회도서관의 소음 유발자를 지나 마트의 서민적 공간에서 누리는 최상위 사치[cite: 2]. 성훈은 무너진 자존감을 치유하기 위해 월세 350만 원의 한강뷰 오피스텔과 수천만 원의 가구 조명으로 공간을 채운다[cite: 2].</div>
+    </div>
+    <span class="ep-tag free">무료 정주행</span>
   </a>
 
-  <a class="ep" href="ep18.html">
-    <span class="ep-num">18</span>
-    <div class="ep-body"><div class="ep-title">일상이 된 사치</div><div class="ep-desc">포르쉐와 명품이 지루해진 순간, 도연이 제안하는 새로운 길.</div></div>
-    <span class="ep-tag free">무료</span>
+  <!-- 파트 3 -->
+  <a class="ep" href="free-part3.html">
+    <span class="ep-num">PART 3</span>
+    <div class="ep-body">
+      <div class="ep-title">도로 위의 계급장과 질주의 쾌락 (10화 ~ 13화)</div>
+      <div class="ep-desc">K5 렌터카를 벗어나 도산대로의 포식자인 포르쉐 카이엔을 60개월 할부로 출고하는 레버리지의 미학[cite: 2]. 아난티 코브와 사우스케이스 절벽 위 요새에서 4만 5천 원짜리 랍스터 라면을 먹으며 성공을 연출한다[cite: 2].</div>
+    </div>
+    <span class="ep-tag free">무료 정주행</span>
   </a>
 
-  <a class="ep gumroad-button" href="https://여기.gumroad.com/l/android-allpass?wanted=true">
-    <span class="ep-num">19</span>
-    <div class="ep-body"><div class="ep-title">당근이세요? (이후 유료 회차)</div><div class="ep-desc">결제 후 완결(56화)까지 즉시 열람 가능한 구간입니다.</div></div>
-    <span class="ep-tag paid">🔒 결제 후 열람</span>
+  <!-- 파트 4 -->
+  <a class="ep" href="free-part4.html">
+    <span class="ep-num">PART 4</span>
+    <div class="ep-body">
+      <div class="ep-title">구름 위의 침실과 도파민의 종말 (14화 ~ 18화)</div>
+      <div class="ep-desc">대한항공 일등석, 파리 리츠 호텔, 에르메스 버킨백 환불 소동과 미슐랭 쓰리스타의 숨 막히는 공허함[cite: 2]. 마터호른 설산에서 우주의 설계자를 묻던 성훈은 마침내 쾌락 적응을 겪고 모든 소유를 비워내기로 결심한다[cite: 2].</div>
+    </div>
+    <span class="ep-tag free">무료 정주행</span>
+  </a>
+
+  <!-- 유료 전환선 (19화~) -->
+  <a class="ep map-paid gumroad-button" href="https://여기.gumroad.com/l/android-allpass?wanted=true">
+    <span class="ep-num" style="color:var(--ink-faint)">PART 5</span>
+    <div class="ep-body">
+      <div class="ep-title" style="color:var(--ink-soft)">현실 사회 시스템의 리모델링 (19화 ~ 56화 완결)</div>
+      <div class="ep-desc">100억의 한도가 풀리며 시작되는 MIR 프로젝트[cite: 2]. 미디어 미르의 팩트 폭격, 어반 마이너 노인 카트 보급, 로펌 태산 압살, 가와사키 오진 교정 및 국회 예산 전수조사 칼질이 시작됩니다[cite: 2].</div>
+    </div>
+    <span class="ep-tag paid">🔒 완결 패스로 열람</span>
   </a>
 </section>
 
 <section id="bundles" class="wrap">
   <div class="s-head">
-    <h2 class="s-title">이용권 선택</h2>
-    <p class="s-sub">웹에서 즉시 읽고 싶다면 아래 이용권을 구매하세요.</p>
+    <h2 class="s-title">완결 패스 구매</h2>
+    <p class="s-sub">19화부터의 소설 후반부 및 성훈과 도연의 MIR 프로젝트 전체 분량은 패스 구매 후 즉시 열람 가능합니다[cite: 2].</p>
   </div>
   <div class="bundles">
-    <div class="bundle">
-      <h3>단편 열람권</h3>
-      <div class="b-price">1,000원</div>
-      <p>원하는 유료 회차 1편 선택 열람</p>
-      <a href="https://여기.gumroad.com/l/single" class="btn btn-secondary gumroad-button">구매하기</a>
-    </div>
     <div class="bundle best">
-      <h3>완결 패스 (Best)</h3>
+      <h3>소설 전편 완결 패스</h3>
       <div class="b-price">5,000원</div>
-      <p>56화 완결까지 모든 회차 무제한 열람</p>
-      <a href="https://여기.gumroad.com/l/allpass" class="btn btn-primary gumroad-button">패스 구매</a>
+      <p style="color:var(--ink-soft); margin-bottom: 20px;">56화 완결까지 모든 유료 회차 즉시 해제 및 영구 소장[cite: 2]</p>
+      <a href="https://여기.gumroad.com/l/android-allpass?wanted=true" class="btn btn-primary gumroad-button">완결까지 한 번에 읽기</a>
     </div>
   </div>
 </section>
@@ -158,8 +180,8 @@
 <footer>
   <div class="wrap">
     <div class="book-info">
-      <strong>안드로이드는 쇼핑백을 든다</strong> | 저자 조일출 [cite: 1, 2]<br>
-      발행일: 2025년 12월 10일 | 출판사: 주식회사 부크크 
+      <strong>안드로이드는 쇼핑백을 든다</strong> | 저자 조일출[cite: 2]<br>
+      발행일: 2025년 12월 10일 | 출판사: 주식회사 부크크[cite: 2]
     </div>
     <p>© 2025 Jo Il-chul. All Rights Reserved. <a href="making.html" style="color:var(--c3); text-decoration:none;">공동 집필 스토리 보기</a></p>
   </div>
