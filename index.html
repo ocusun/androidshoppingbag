@@ -35,20 +35,41 @@
   .blob.b2 { width:300px; height:300px; bottom:10%; left:-100px; background:var(--c3); }
   .wrap { max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
 
-  header { position:sticky; top:0; z-index:50; background: rgba(251,250,246,0.8); backdrop-filter: blur(15px); border-bottom:1px solid var(--line); }
-  .nav { display:flex; align-items:center; justify-content:space-between; height:72px; }
-  .logo { font-family:var(--serif); font-weight:700; font-size:1.2rem; }
-  .logo span { background:linear-gradient(135deg,var(--c1),var(--c3)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .nav-links { display:flex; gap:24px; }
-  .nav-links a { color:var(--ink-soft); text-decoration:none; font-weight:600; font-size:0.9rem; }
-  .nav-links a.highlight { color: var(--c3); }
+  /* ===== 초감각적 미래형 헤더 스타일 ===== */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251, 250, 246, 0.75);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(236, 233, 225, 0.7);
+    transition: all 0.3s ease;
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+  .logo { font-family: var(--serif); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 6px; }
+  .logo span { background: linear-gradient(135deg, var(--c1), var(--c3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .logo::after { content: ''; display: inline-block; width: 6px; height: 6px; background: #00ffaa; border-radius: 50%; box-shadow: 0 0 10px #00ffaa; animation: pulse 2s infinite; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-item { position: relative; text-decoration: none; font-size: 0.88rem; font-weight: 700; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .nav-item:hover { color: var(--ink); }
+  .indicator-free { width: 5px; height: 5px; background: #0a8062; border-radius: 50%; position: relative; }
+  .indicator-free::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: #0a8062; border-radius: 50%; animation: pulse 1.5s infinite; opacity: 0.6; }
+  .tech-tag { font-size: 0.65rem; font-weight: 800; color: var(--c3); background: rgba(167, 139, 250, 0.12); padding: 2px 6px; border-radius: 4px; letter-spacing: 0.05em; }
+  
+  /* 메탈 카드형 CTA 버튼 */
+  .btn-card-cta {
+    position: relative; display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 12px; text-decoration: none; font-size: 0.88rem; font-weight: 800; color: #ffffff;
+    background: linear-gradient(135deg, #111115 0%, #22222b 100%); border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(167, 139, 250, 0.2) inset; overflow: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-card-cta::before { content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); animation: shimmer 4.5s infinite ease-in-out; }
+  .btn-card-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 12px rgba(253, 186, 116, 0.4); border-color: rgba(253, 186, 116, 0.5); }
+  .btn-card-cta span.price { font-size: 0.75rem; color: var(--c4); font-weight: 700; background: rgba(253, 186, 116, 0.15); padding: 1px 6px; border-radius: 4px; }
 
+  /* 히어로 및 레이아웃 */
   .hero { padding: 100px 0 60px; }
   .kicker { display:inline-block; font-size:0.75rem; font-weight:700; color:var(--ink-soft); background:var(--bg-soft); padding:6px 14px; border-radius:100px; margin-bottom:24px; }
   .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 24px; }
   .hero h1 span { background: linear-gradient(120deg, var(--c1), var(--c4)); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .hero .logline { font-size:1.1rem; color:var(--ink-soft); max-width:600px; margin-bottom:40px; }
-  
   .btn-group { display:flex; gap:12px; flex-wrap:wrap; }
   .btn { display:inline-block; padding:14px 28px; border-radius:100px; text-decoration:none; font-weight:600; font-size:0.95rem; transition:0.2s; }
   .btn-primary { background:var(--ink); color:#fff; }
@@ -62,7 +83,7 @@
 
   .ep { display:flex; align-items:center; gap:20px; padding:24px; background:var(--card); border:1px solid var(--line); border-radius:20px; margin-bottom:16px; text-decoration:none; color:inherit; transition:0.2s; }
   .ep:hover { border-color:var(--c3); transform:translateX(5px); box-shadow:0 10px 25px rgba(0,0,0,0.04); }
-  .ep-num { font-family:var(--serif); font-size:1.3rem; font-weight:700; color:var(--ink-faint); min-width:60px; }
+  .ep-num { font-family:var(--serif); font-size:1.1rem; font-weight:700; color:var(--ink-faint); min-width:65px; text-transform:uppercase; letter-spacing:0.05em; }
   .ep-body { flex:1; }
   .ep-title { font-family:var(--serif); font-weight:700; font-size:1.2rem; margin-bottom:6px; }
   .ep-desc { color:var(--ink-soft); font-size:0.92rem; line-height:1.5; }
@@ -77,6 +98,13 @@
   
   footer { border-top:1px solid var(--line); padding:60px 0; text-align:center; color:var(--ink-faint); font-size:0.9rem; }
   .book-info { margin-bottom:20px; color:var(--ink-soft); }
+
+  @keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(10,128,98,0.5); }
+    70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 6px rgba(10,128,98,0); }
+    100% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(10,128,98,0); }
+  }
+  @keyframes shimmer { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
 </style>
 </head>
 <body>
@@ -87,9 +115,11 @@
   <div class="wrap nav">
     <div class="logo">안드로이드<span>.</span></div>
     <nav class="nav-links">
-      <a href="#episodes">무료 연재</a>
-      <a href="#bundles">완결 패스</a>
-      <a href="making.html" class="highlight">공동 집필록</a>
+      <a href="#episodes" class="nav-item"><span class="indicator-free"></span>무료 연재 관</a>
+      <a href="making.html" class="nav-item">공동 집필록 <span class="tech-tag">AI CORE</span></a>
+      <a href="https://여기.gumroad.com/l/android-allpass?wanted=true" class="btn-card-cta gumroad-button">
+        플래티넘 패스 활성화 <span class="price">₩5,000</span>
+      </a>
     </nav>
   </div>
 </header>
@@ -97,8 +127,7 @@
 <div class="hero wrap">
   <span class="kicker">근미래 AI · 자본주의 풍자 소설</span>
   <h1>안드로이드는<br><span>쇼핑백</span>을 든다</h1>
-  <p class="logline">6,000원짜리 식권에 존엄을 저울질당하던 직장인 성훈. 그에게 장전된 5억 한도의 메탈 카드와 욕망을 복사하는 안드로이드가 나타났다.</p>
-  
+  <p class="logline">6,000원짜리 식권에 존엄을 저울질당하던 직장인 성훈. 그에게 장전된 5억 한도의 메탈 카드와 욕망을 복사하는 안드로이드가 나타났다[cite: 2].</p>
   <div class="btn-group">
     <a href="#episodes" class="btn btn-primary">무료 분량 먼저 읽기</a>
     <a href="https://www.bookk.co.kr/" target="_blank" class="btn btn-secondary">부크크 종이책 구매</a>
@@ -111,9 +140,8 @@
     <p class="s-sub">본 소설은 총 56화 완결작입니다[cite: 2]. 앞부분 1/3 분량(00~18화)을 4개의 파트로 나누어 전면 무료 공개합니다[cite: 2].</p>
   </div>
 
-  <!-- 파트 1 -->
   <a class="ep" href="free-part1.html">
-    <span class="ep-num">PART 1</span>
+    <span class="ep-num">Part 1</span>
     <div class="ep-body">
       <div class="ep-title">욕망의 탄생과 첫 번째 전투복 (00화 ~ 04화)</div>
       <div class="ep-desc">깜부치킨의 기적과 5억 한도 카드의 등장[cite: 2]. 성훈은 자신의 존엄을 식권으로 계산하는 이들에게 사직서를 던지고 265만 원짜리 명품 패딩과 시계로 외피를 바꾸기 시작한다[cite: 2].</div>
@@ -121,9 +149,8 @@
     <span class="ep-tag free">무료 정주행</span>
   </a>
 
-  <!-- 파트 2 -->
   <a class="ep" href="free-part2.html">
-    <span class="ep-num">PART 2</span>
+    <span class="ep-num">Part 2</span>
     <div class="ep-body">
       <div class="ep-title">콘크리트 쇼핑백과 취향의 계급 (05화 ~ 09화)</div>
       <div class="ep-desc">국회도서관의 소음 유발자를 지나 마트의 서민적 공간에서 누리는 최상위 사치[cite: 2]. 성훈은 무너진 자존감을 치유하기 위해 월세 350만 원의 한강뷰 오피스텔과 수천만 원의 가구 조명으로 공간을 채운다[cite: 2].</div>
@@ -131,9 +158,8 @@
     <span class="ep-tag free">무료 정주행</span>
   </a>
 
-  <!-- 파트 3 -->
   <a class="ep" href="free-part3.html">
-    <span class="ep-num">PART 3</span>
+    <span class="ep-num">Part 3</span>
     <div class="ep-body">
       <div class="ep-title">도로 위의 계급장과 질주의 쾌락 (10화 ~ 13화)</div>
       <div class="ep-desc">K5 렌터카를 벗어나 도산대로의 포식자인 포르쉐 카이엔을 60개월 할부로 출고하는 레버리지의 미학[cite: 2]. 아난티 코브와 사우스케이스 절벽 위 요새에서 4만 5천 원짜리 랍스터 라면을 먹으며 성공을 연출한다[cite: 2].</div>
@@ -141,9 +167,8 @@
     <span class="ep-tag free">무료 정주행</span>
   </a>
 
-  <!-- 파트 4 -->
   <a class="ep" href="free-part4.html">
-    <span class="ep-num">PART 4</span>
+    <span class="ep-num">Part 4</span>
     <div class="ep-body">
       <div class="ep-title">구름 위의 침실과 도파민의 종말 (14화 ~ 18화)</div>
       <div class="ep-desc">대한항공 일등석, 파리 리츠 호텔, 에르메스 버킨백 환불 소동과 미슐랭 쓰리스타의 숨 막히는 공허함[cite: 2]. 마터호른 설산에서 우주의 설계자를 묻던 성훈은 마침내 쾌락 적응을 겪고 모든 소유를 비워내기로 결심한다[cite: 2].</div>
@@ -151,9 +176,8 @@
     <span class="ep-tag free">무료 정주행</span>
   </a>
 
-  <!-- 유료 전환선 (19화~) -->
-  <a class="ep map-paid gumroad-button" href="https://여기.gumroad.com/l/android-allpass?wanted=true">
-    <span class="ep-num" style="color:var(--ink-faint)">PART 5</span>
+  <a class="ep gumroad-button" href="https://여기.gumroad.com/l/android-allpass?wanted=true">
+    <span class="ep-num" style="color:var(--ink-faint)">Part 5</span>
     <div class="ep-body">
       <div class="ep-title" style="color:var(--ink-soft)">현실 사회 시스템의 리모델링 (19화 ~ 56화 완결)</div>
       <div class="ep-desc">100억의 한도가 풀리며 시작되는 MIR 프로젝트[cite: 2]. 미디어 미르의 팩트 폭격, 어반 마이너 노인 카트 보급, 로펌 태산 압살, 가와사키 오진 교정 및 국회 예산 전수조사 칼질이 시작됩니다[cite: 2].</div>
