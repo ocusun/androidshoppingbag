@@ -4,28 +4,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>안드로이드는 쇼핑백을 든다 — Part 3</title>
+<title>안드로이드는 쇼핑백을 든다 — PART 03</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: #fbfaf6; --card: #ffffff; --ink: #1a1a1f; --ink-soft: #51525c; --line: #ece9e1; --c3: #a78bfa; --ui: 'Pretendard Variable', sans-serif; --serif: 'Gowun Batang', serif; --read: 'Nanum Myeongjo', serif; }
+  :root { --bg: #fbfaf6; --bg-soft:#f5f3ed; --card: #ffffff; --ink: #1a1a1f; --ink-soft: #51525c; --line: #ece9e1; --c3: #a78bfa; --ui: 'Pretendard Variable', sans-serif; --serif: 'Gowun Batang', serif; --read: 'Nanum Myeongjo', serif; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background: var(--bg); color: var(--ink); font-family: var(--ui); line-height: 1.8; -webkit-font-smoothing: antialiased; }
   .wrap { max-width:680px; margin:0 auto; padding:0 24px; }
   header { padding: 24px 0; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
   .back-link { color: var(--ink-soft); text-decoration: none; font-size: 0.95rem; font-weight: 600; }
-  .ep-header { margin-bottom: 40px; text-align: center; }
-  .ep-num { font-family: var(--serif); color: var(--c3); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.1em; display: block; margin-bottom: 12px; }
-  .ep-title { font-family: var(--serif); font-size: 2rem; font-weight: 700; }
-  .chapter-divider { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin: 60px 0 30px; color: var(--ink); border-bottom: 1px dashed var(--line); padding-bottom: 10px; }
-  .ep-content { font-family: var(--read); font-size: 1.125rem; color: #2c2c35; text-align: justify; margin-bottom: 60px; }
-  .ep-content p { margin-bottom: 22px; }
-  .ep-content p.dialogue { color: var(--ink); font-weight: 500; }
+  .ep-header { margin-bottom: 50px; text-align: center; }
+  .ep-num { font-family: var(--serif); color: var(--c3); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.18em; display: block; margin-bottom: 14px; }
+  .ep-title { font-family: var(--serif); font-size: 2.1rem; font-weight: 700; line-height:1.3; }
+  .progress { position:fixed; top:0; left:0; height:3px; background:var(--c3); z-index:100; width:0%; }
+  .chapter-divider { font-family: var(--serif); font-size: 1.45rem; font-weight: 700; margin: 64px 0 30px; color: var(--ink); border-bottom: 1px dashed var(--line); padding-bottom: 12px; }
+  .ep-content { font-family: var(--read); font-size: 1.13rem; color: #2c2c35; margin-bottom: 60px; word-break: keep-all; }
+  .ep-content p { margin-bottom: 24px; line-height:1.95; }
+  .log-box { background: #16161d; color: #4ade80; font-family: 'SF Mono', monospace; padding: 22px 24px; border-radius: 14px; margin: 32px 0; font-size: 0.88rem; line-height: 1.8; letter-spacing:-0.01em; }
   .next-box { background: var(--card); border: 1px solid var(--line); padding: 40px 32px; border-radius: 24px; text-align: center; margin-bottom: 80px; }
+  .next-box p { font-family:var(--read); color:var(--ink-soft); margin-bottom:24px; }
   .btn-next { display: inline-block; background: var(--ink); color: #fff; padding: 14px 36px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+  .paywall-box { background:#111115; color:#fff; border:1px solid rgba(255,255,255,0.1); padding:48px 32px; border-radius:24px; text-align:center; margin-bottom:80px; box-shadow:0 20px 40px rgba(0,0,0,0.3); }
+  .paywall-box h3 { font-family:var(--serif); font-size:1.6rem; color:#fdba74; margin-bottom:14px; }
+  .paywall-box p { font-family:var(--read); font-size:1rem; color:#c9c9d1; margin-bottom:26px; line-height:1.75; }
+  .btn-allpass { display:inline-block; background:linear-gradient(135deg,#fdba74,#ff7a8a); color:#fff; padding:16px 40px; border-radius:100px; text-decoration:none; font-weight:800; font-size:1rem; box-shadow:0 8px 20px rgba(255,122,138,0.3); transition:0.2s; }
+  .btn-allpass:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(255,122,138,0.5); }
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 <header class="wrap"><div class="nav"><a href="index.html" class="back-link">← 메인 홈으로</a></div></header>
 <main class="wrap">
   <div class="ep-header">
@@ -34,21 +42,84 @@
   </div>
   <div class="ep-content">
     <div class="chapter-divider">제10화 도로 위의 계급장</div>
-    <p>퇴근 시간 강남 도산대로, 렌터카 K5에 앉아있던 성훈은 도로 위의 차량 계급도를 목격한다. 성공한 가장의 교과서인 BMW X5, 안락함과 단절을 상징하는 벤츠 GLE, 그리고 SUV의 탈을 쓴 최상위 포식자 포르쉐 카이엔의 배기음. K5 운전대를 잡은 성훈은 극심한 초라함을 느끼며 결심한다. "나도 저 계급장을 달아야겠어. 기왕이면... 제일 센 놈으로."</p>
-
+    <p>서울 강남구 신사동, 도산대로(Dosan-daero). 퇴근 시간의 도산대로는 거대한 주차장이었다. 성훈은 렌터카 K5 운전석에 앉아 꽉 막힌 도로를 바라보며 한숨을 쉬었다. 5억 원짜리 카드를 가지고 있지만, 아직 그의 &#x27;발&#x27;은 평범한 세단이었다.</p>
+    <p>&quot;도연, 이 도로 말이야... 그냥 길이 아니라 거대한 쇼룸 같지 않아?&quot; 성훈이 창밖을 가리켰다. 4차선 도로에는 온갖 종류의 차들이 뒤엉켜 있었지만, 그중에서도 눈에 띄는 것은 독일산 SUV 삼총사였다. X5, GLE, 카이엔. 성훈의 시선이 앞서거니 뒤서거니 하는 세 대의 차량에 고정되었다. [Target 1: BMW X5 - &quot;성공한 가장의 교과서&quot;]가장 앞서가는 것은 은색 [BMW X5]였다. &quot;저 차는... 뭐랄까, &#x27; 나는 가장으로서 책임을 다하고 있고, 사회적으로도 꽤 성공했다&#x27;는 걸 보여주는 모범답안 같은 느낌이야.&quot; 성훈이 분석했다. 도연이 즉시 데이터를 띄웠다. [VEHICLE ANALYSIS: BMW X5]주요 구매층: 40대 전문직 남성, 고소득 회사원. 이미지: 실용적이고 합리적인 성공, 가족을 위한 헌신, 역동적인 라이프스타일. 분석: X5는 &#x27;가장&#x27;이라는 무게감을 견디면서도 &#x27;달리고 싶은 본능&#x27;을 포기하지 않은 남자들의 선택이다. 카시트를 장착하고도 가끔은 스포츠 모드로 질주하고 싶은 욕망의 절충안. [Target 2: 벤츠 GLE - &quot;우아한 사모님의 마차&quot;]X5 옆 차선에는 흰색 [벤츠 GLE]가 우아하게 서 있었다. 운전석에는 선글라스를 낀 중년 여성이 앉아 있었다. &quot;반면에 저 GLE는...</p>
+    <p>&#x27;나는 안락한 삶을 누리고 있다&#x27;거나, &#x27;내 능력으로 우아함을 유지하고 있다&#x27;는 느낌?&quot; [VEHICLE ANALYSIS: Mercedes-Benz GLE]주요 구매층: 40~50대 여성, 전문직, 혹은 고소득층 배우자. 이미지: 우아함, 편안함, 안전, 과시하지 않는 부. 분석: GLE는 도로 위의 &#x27;퍼스트 클래스&#x27;. 삼각별 로고가 주는 안정감과 부드러운 승차감은 &#x27;치열한 경쟁에서 한 발짝 물러나 여유를 즐기는 자&#x27;의 특권. [Target 3: 포르쉐 카이엔 - &quot;도로 위의 포식자&quot;]그리고 그 뒤에서, 낮은 배기음을 내며 존재감을 과시하는 검은색 [포르쉐 카이엔]. 성훈의 눈이 카이엔의 방패 로고에 꽂혔다. &quot;저건... 그냥 &#x27;다 비켜, 내가 왕이다&#x27; 이거지.&quot; [VEHICLE ANALYSIS: Porsche Cayenne]주요 구매층: 30~50대 고소득 자영업자, 스타트업 대표, 전문직. 이미지: 압도적인 성공, 트렌디함, 과시욕, 타협하지 않는 성능. 분석: 카이엔은 SUV라는 탈을 쓴 스포츠카. X5와 GLE가 &#x27;가족&#x27; 과 &#x27;안락함&#x27;을 고려할 때, 카이엔은 오직 &#x27;운전자의 쾌락&#x27;과 &#x27;타인의 시선&#x27;에 집중. 도로 위에서 가장 확실하게 계급을 나누는 포식자.</p>
+    <p>&quot;재밌네. 엇비슷해 보이는 SUV인데, 타는 사람에 따라 이렇게 이미지가 다르다니.&quot; 성훈은 핸들을 잡은 손에 힘을 주었다. 그의 K5는 이 화려한 계급장들 사이에서 너무나 초라해 보였다.</p>
+    <p>&quot;도연.&quot; &quot;네&quot;</p>
+    <p>&quot;나도 저 계급장을 달아야겠어. 기왕이면... 제일 센 놈으로.&quot; 성훈의 시선이 검은색 카이엔의 뒷모습을 끈질기게 쫓았다. 5억 원의 한도가 그의 주머니 속에서 뜨겁게 달아오르고 있었다. 도산대로의 정체는 곧 풀릴 것이고, 성훈의 욕망은 질주를 시작할 준비를 마쳤다.</p>
     <div class="chapter-divider">제11화 시승기</div>
-    <p>BMW 매장에서 X5를 시승하며 남성적 효능감을 맛보고, 벤츠 매장에서 구름 위 응접실 같은 GLE의 안락함과 삼각별이 주는 하차감을 스캔했다. 마지막으로 포르쉐 대치 센터에서 검은색 카이엔의 시동 레버를 돌리자 천둥 같은 배기음이 터져 나왔다. 거리를 두는 주변 차들을 보며 짜릿한 우월감을 맛본 성훈은 가성비를 비웃으며 자존감을 격상시키는 카이엔의 견적서를 구겨지듯 꽉 쥐었다.</p>
-
+    <p>가장 먼저 도착한 곳은 BMW 전시장. 성훈은 전시장의 문을 열고 들어가자마자 가장 눈에 띄는 X5 xDrive 40i 앞에 섰다. 다부진 키드니 그릴이 마치 콧김을 뿜는 황소처럼 보였다. 시승차의 운전석에 앉았다. 묵직한 스티어링 휠의 감각. 시동을 걸자 &#x27;으르렁&#x27;하는 낮은 배기음이 심장을 건드렸다. 도로로 나서 엑셀에 발을 올리는 순간, 차체는 망설임 없이 앞으로 튀어 나갔다.</p>
+    <p>&quot;와... 이거 힘이 장난 아닌데? 밟는 대로 나가네.&quot; 성훈이 감탄하자 조수석의 도연이 차가운 목소리로 데이터를 읊었다.</p>
+    <div class="log-box">
+      [OBSERVATION LOG: Y-143]
+    </div>
+    <p>모델: BMW X5특성: &#x27;달리는 즐거움(Sheer Driving Pleasure)&#x27;을 표방함. 분석: 파트너의 심박수가 120bpm까지 상승. 이 차는 운전자에게 &#x27;나는 언제든 치고 나갈 수 있다&#x27;는 남성적 효능감을 팝니다. 1억 3천만 원이라는 가격은 단순한 이동 수단이 아니라, 가장의 무게를 잊고 질주하고 싶은 &#x27;일탈의 비용&#x27;으로 책정된 것. 성훈은 코너를 거칠게 돌리며 생각했다. 5년 동안 숨죽여 살았던 자신의 야성이 깨어나는 기분이었다. 하지만 왠지 모르게 허리가 조금 아파왔다. 2. 벤츠 GLE : 구름 위의 응접실두 번째 행선지는 메르세데스 벤츠. 성훈은 흰색 GLE 450에 올랐다. 문을 여는 순간부터 달랐다. 화려한 앰비언트 라이트가 실내를 감싸고 있었고, 가죽 시트는 마치 어머니의 품처럼 푹신했다. 주행을 시작하자 도산대로의 요철이 사라졌다. 방금 전 X5가 도로를 움켜쥐고 달렸다면, GLE는 도로 위를 부유하는 듯했다.</p>
+    <p>&quot;이건... 차가 아니라 움직이는 응접실이네. 세상이 다 평화로워 보여.&quot; 성훈이 핸들에 새겨진 삼각별 로고를 쓰다듬었다. 밖에서 사람들이 자신을 어떻게 볼지 상상이 갔다. &#x27;성공한 중년&#x27;, &#x27;여유 있는 자산가&#x27;.</p>
+    <p>&quot;이게 편하긴 진짜 편하다.&quot;</p>
+    <p>&quot;물론이죠, 여보.&quot; 도연이 우아하게 대꾸하며 로그를 기록했다.</p>
+    <div class="log-box">
+      [OBSERVATION LOG: Y-143]
+    </div>
+    <p>모델: Mercedes-Benz GLE특성: 압도적인 승차감과 하차감(내릴 때의 시선). 분석: 파트너의 뇌파가 &#x27;안정&#x27; 상태로 접어들었음. 이 차는 도로 위의 소음과 충격을 차단하며 승차감에 집중. 사람들은 이 &#x27;단절&#x27; 을 사기 위해 기꺼이 1억 5천만 원을 지불하죠. 성공했다는 증표를 남에게 보여주기 위한 가장 안전하고 보수적인 선택지. 3. 포르쉐 카이엔 : 도로 위의 포식자마지막으로 향한 곳은 포르쉐 대치 센터. 성훈은 입구에서부터 압도당했다. 전시된 차들은 기계가 아니라 예술품처럼 조명을 받고 있었다. 검은색 카이엔. 방패 모양의 엠블럼. 성훈은 떨리는 손으로 시동 버튼(왼쪽에 있는)을 돌렸다. 쾅- 쿠르르릉. X5의 배기음이 맹수의 으르렁거림이었다면, 카이엔의 소리는 천둥소리였다. 도로에 진입하자마자 주변의 차들이 홍해처럼 갈라지는(것처럼 성훈은 느꼈다) 기적을 목격했다. 엑셀을 밟았다. 머리가 헤드레스트에 박혔다. GLE의 편안함과 X5의 야성, 그 두 가지가 모순적으로 공존했다. 아니, 그 이상의 무언가가 있었다.</p>
+    <p>&quot;이건... 반칙이다.&quot; 성훈의 입에서 탄식이 흘러나왔다.</p>
+    <p>&quot;뭐가요?&quot;</p>
+    <p>&quot;그냥 다 이길 것 같아. 내 앞에 아무도 없었으면 좋겠어.&quot; 성훈은 백미러로 뒤쳐지는 차들을 보며 짜릿한 우월감을 느꼈다. 그것은 단순히 빠른 속도 때문이 아니었다. &#x27;포르쉐&#x27;라는 계급장이 주는 절대적인 권력이었다. 도연의 눈동자가 빠르게 데이터를 처리했다.</p>
+    <div class="log-box">
+      [OBSERVATION LOG: Y-143]
+    </div>
+    <p>모델: Porsche Cayenne특성: 스포츠카의 DNA를 가진 SUV. 욕망의 정점. 분석: 파트너의 도파민 수치가 한계치를 초과했습니다. 위험합니다. 그는 지금 차를 운전하는 게 아니라 &#x27;권력&#x27;을 휘두르고 있습니다. 옵션을 몇 개만 추가해도 2억 원에 육박하는 이 기계는, &#x27;가성비&#x27;라는 단어를 비웃으며 차주의 자존감을 도로 위의 최상위 포식자로 격상시킴. 시승을 마치고 딜러 샵을 나서는 성훈의 손에는 견적서 세 장이 들려 있었다. 그는 주차장에 세워둔 자신의 렌터카 K5를 바라보았다. 오징어처럼 납작하고 초라해 보였다.</p>
+    <p>&quot;도연&quot;</p>
+    <p>&quot;네, 파트너님. 결정하셨나요?&quot; 성훈은 견적서 중 하나를 구겨질 정도로 꽉 쥐었다.</p>
+    <p>&quot;응. 이제 내가 뭘 타야 할지 알 것 같아.&quot; 그의 시선이 검은색 방패 문양이 박힌 견적서에 고정되었다.</p>
     <div class="chapter-divider">제12화 2억짜리 장난감</div>
-    <p>취소분 재고 차량이 즉시 출고 가능했다. 아크틱 그레이 컬러, 21인치 블랙 휠, 투톤 가죽 등 온갖 옵션이 더해진 총금액은 175,000,000원. 한 방에 카드를 태우면 현금 유동성이 줄어들 것을 염려한 15년 차 직장인 성훈은 선수금 30%를 걸고 60개월 할부로 결제하는 '레버리지의 미학'을 발휘한다. 무광 빛의 강철 수트 같은 카이엔을 끌고 도로로 나오자 버스와 택시가 거리를 벌리는 결계가 발휘되었다. 도연은 내비게이션에 국내에서 가장 비싼 길인 강원도 설해원, 부산 아난티 코브를 띄웠다.</p>
-
+    <p>&quot;이걸로 하죠. 가장 빨리 받을 수 있는 걸로.&quot;</p>
+    <p>&quot;탁월한 선택이십니다, 고객님. 잠시만 기다려주세요&quot; 딜러는 빠르게 접견실을 나섰다. 그리고 몇 군데 통화를 하더니 다시 들어왔다.</p>
+    <p>&quot;마침 오늘 고객 취소분으로 나온 재고가 한 대 있습니다. 옵션은 변경할 수 없지만, 바로 출고 가능하네요. 옵션은....&quot; - 색상은 오크틱 그레이 : 5,300,000- 휠은 21인치 블랙(실크 글로스) : 5,800,000- 투톤 가죽 인테리어 : 5,900,000- 앞좌석 마사지 및 통풍시트 : 1,200,000- 오프로드 패키지, 나침반 디스플레이 포함 : 2,700,000- 차량용 소화기 : 1,000,000...</p>
+    <p>&quot;총 금액은 175,000,000원입니다.“성훈은 잠시 생각에 잠겼다. 5억이 무한대처럼 느껴졌던게 엊그제인데, 175,000,000 이라는 숫자를 보니, 지금 결제하면 카드한도가 거의 반토막이 나겠다는 생각이 든 것이다. 이러다 너무 빨리 결승점에 다다를 것 같은 불길한 예감이 밀려왔다.</p>
+    <p>&quot;결제는 어떻게 도와드릴까요? 일시불로 하시면 오토 캐시백 혜택이 있는데...&quot; 딜러가 조심스럽게 물었다. 그는 당연히 성훈이 &#x27;현금 결제&#x27;를 할 것이라 예상하는 눈치였다. 하지만 성훈은 카드를 만지작거리며 씨익 웃었다. &quot;아뇨. 할부로 합시다.&quot; &quot;네? 할부요?&quot; &quot;선수금 30%만 걸고, 나머지는 60개월.&quot; 옆에 앉은 도연 역시 의아한 듯 성훈을 바라보았다.</p>
+    <p>&quot;여보, 이 카드가 이자 비용까지 지원되긴 하지만, 굳이 부채를 만들 필요가 있나요? 지금도 일시불 결제가 가능해요.&quot; 성훈은 딜러가 듣지 못하게 도연의 귓가에 속삭였다.</p>
+    <p>&quot;도연, 잘 들어. 내 카드 한도는 5억이야. 여기서 차 값으로 1억 7천을 한 방에 태우면? 남은 돈이 절반으로 줄어들잖아. 그럼 내가 하고 싶은 &#x27;진짜 경험&#x27;을 다 못 한다고.&quot; 성훈의 눈이 반짝였다. 이것은 직장생활 15년 차가 터득한 &#x27;카드 돌려막기&#x27;의 진화형, &#x27;레버리지의 미학&#x27;이었다.</p>
+    <p>&quot;하지만 할부로 끊으면? 이번 달엔 선수금 5천만 원이랑 첫 달 할부금 200만원 정도만 나가면 돼. 1년 후 할부 이자는 회사(엠비디아)가 잘 처리하겠지!&quot; 도연의 눈동자가 빠르게 깜빡이며 데이터를 기록했다. [CALCULATING...]파트너는 &#x27;부채&#x27;를 이용해 당장의 &#x27;현금 유동성&#x27;을 극대화하는 전략을 택함. 이는 기업들이 투자를 위해 대출을 받는 원리와 유사함. 단, 갚을 능력이 없다는 것만 빼고.</p>
+    <p>&quot;합리적이네요. &quot; 도연이 고개를 끄덕였다. 성훈은 딜러에게 카드를 내밀었다. &quot;60개월입니다.&quot;</p>
+    <p>&quot;여보, 축하해요.&quot; 도연이 성훈의 팔을 감싸며 귓가에 속삭였다. &quot; 근데 아까 옵션표 보셨어요? 휠 색깔 바꾸는데 580만 원, 투톤 시트 590만 원, 심지어 차량용 소화기가 100만원이에요&quot;</p>
+    <p>&quot;그게... 포르쉐 감성이라잖아.&quot; 성훈이 멋쩍게 대답했다. &quot;아뇨. 그건 &#x27;마진율의 미학&#x27;이죠. 기능적으로는 아무 쓸모 없는 색칠놀이에 수백만 원을 태우게 만드는 것. 그게 명품의 본질이니까요.&quot; 출고장 (Handover Zone)검은색 실크 커버가 벗겨지는 순간, 성훈은 숨을 멈췄다. [Porsche Cayenne] 무광에 가까운 아크틱 그레이 컬러가 조명을 받아 서늘하게 빛나고 있었다.</p>
+    <p>&quot;와...&quot; 성훈은 홀린 듯 차체에 손을 올렸다. 차가운 금속의 감촉. 이것은 단순한 이동 수단이 아니었다. 도로 위의 무시와 경멸로부터 자신을 지켜줄, 가장 강력하고 비싼 &#x27;강철 수트&#x27;였다. 운전석에 올랐다. 알칸타라 소재의 핸들을 꽉 쥐었다. 왼손으로 시동 레버를 돌렸다. 콰아아앙-! 성훈의 등골을 타고 전율이 흘렀다. 그 소리는 마치 &quot;이제 아무도 널 무시하지 못해&quot;라고 으르렁거리는 것 같았다. 도로로 나왔다. 성훈은 백미러를 보며 미소 지었다. 뒤따라오던 택시가 거리를 벌리고, 끼어들려던 버스가 멈칫했다. 이것이 바로 &#x27; 도로 위의 모세의 기적&#x27;. 포르쉐 부적이 발휘하는 결계(結界)였다.</p>
+    <p>&quot;도연, 어디로 갈까? 이 녀석 힘 좀 써보고 싶은데.&quot; 성훈의 목소리가 한 옥타브 올라가 있었다.</p>
+    <p>&quot;추천 경로가 있어요.&quot; 조수석의 도연이 내비게이션 화면을 띄웠다. &quot;남은 한도가 충분하니, 국내에서 가장 비싼 길을 따라가 보죠. 강원도 양양의 &#x27;설해원&#x27;, 부산 기장의 &#x27;아난티 코브&#x27;, 그리고 남해 절벽 위의 요새 &#x27;사우스케이프&#x27;까지.&quot;</p>
+    <p>&quot;와... 이름만 들어봤던 곳들이네. 회원권 없으면 예약도 안 된다는 거기?&quot;</p>
+    <p>&quot;걱정 마세요. [MBIDIA PLATINUM] 컨시어지 서비스가 당신을 &#x27;VVIP 회원&#x27;으로 모실테니까요. 성훈은 백미러로 자신의 얼굴을 보았다. 선글라스를 낀, 자신감 넘치는 중년의 남자. 30만 원 식권에 울던 찌질한 김 팀장은 그 거울 속에 없었다.</p>
+    <p>&quot;좋아. 땅끝까지 가보자. 고급유로 만땅 채워서!&quot; 성훈은 스포츠 모드 버튼을 눌렀다. 배기음이 한층 더 거칠게 포효했다. 카이엔은 60개월의 시간을 땔감 삼아, 지도 위의 가장 화려한 점들을 향해 미친 듯이 달려 나갔다.</p>
     <div class="chapter-divider">제13화 그들만의 리그</div>
-    <p>부산 기장 아난티 코브 펜트하우스 객실(1박 회원가 150만 원, 비회원 280만 원)에 입성했다. 100평짜리 거실 프라이빗 풀 너머로 바다가 넘실거렸다. 한 그릇에 4만 5천 원짜리 랍스터 라면을 시켜 먹으며 국물을 남겨도 죄책감이 들지 않는 자본의 식성을 실감했다. 이어 남해 절벽 위의 요새 사우스케이프 인피니티 풀 선베드에 누웠으나 평온한 일상을 보내는 자산가들 틈에서 이벤트성의 사치를 부리는 자신과 타인을 끊임없이 비교하며 지독한 소외감을 느꼈다. 성훈은 할부로 산 시간의 불안감을 지우기 위해 국내를 벗어나 유럽 해외 승인을 요청한다.</p>
+    <p>부산 기장, 아난티 코브 (Ananti Cove). 카이엔이 웅장한 해안 절벽을 따라 입구로 진입했다. 이곳은 단순한 호텔이 아니다. 입구에서부터 &#x27;회원&#x27;과 &#x27;비회원&#x27;의 동선이 철저하게 분리된, 자본주의의 계급을 공간으로 구현한 요새였다.</p>
+    <p>&quot;예약 확인되셨습니다, 김성훈 회원님. 펜트하우스 A동으로 모시겠습니다.&quot; 직원이 90도로 허리를 숙였다. &#x27;회원님&#x27;. 그 호칭 하나에 성훈의 어깨가 으쓱해졌다. 사실 그는 회원이 아니다. 엠비디아의 컨시어지 팀이 일시적으로 부여한 가상의 VVIP ID일 뿐. 하지만 문이 열리는 순간, 가짜와 진짜의 구분을 짓는 것은 의미가 없었다. 엘리베이터가 열리고 객실에 들어선 순간, 성훈은 입을 다물지 못했다. 7평 오피스텔에 살던 남자의 눈앞에 100평짜리 바다가 펼쳐져 있었다.</p>
+    <p>&quot;와... 미쳤다.&quot; 거실 한가운데에는 성인 네 명이 들어가도 남을 만한 프라이빗 풀(Pool)이 있었고, 그 너머로 기장 앞바다가 넘실거렸다. 가구 하나하나가 예술 작품 같았다.</p>
+    <p>&quot;이 방이... 1박에 얼마라고?&quot; &quot;회원가 기준 150만 원, 비회원 예약 시 280만 원이에요. 물론 예약조차 불가능하지만요.&quot; 도연이 룸서비스 메뉴판을 펼치며 대답했다.</p>
+    <p>&quot;280만 원... 누구 한 달 월급이 하룻밤에 타버리는구나.&quot; 성훈은 소파에 몸을 던졌다. 가죽 냄새가 났다. 돈 냄새였다.</p>
+    <p>&quot;배고프다. 뭐 좀 시킬까. 여기서 유명한 걸로.&quot; 잠시 후, 룸서비스 카트가 들어왔다. 은색 돔(Dome) 뚜껑이 열리자 김이 모락모락 피어올랐다. [해산물 랍스터 라면] 가격: 45,000원.</p>
+    <p>&quot;라면 한 그릇에 4만 5천 원이라...&quot; 성훈은 젓가락을 들었다. 큼직한 랍스터 집게발과 전복이 국물 위에 둥둥 떠 있었다. 국물을 한 모금 들이켰다.</p>
+    <p>&quot;캬아...!&quot; msg의 자극적인 맛이 아니었다. 깊고 진한, 바다를 통째로 끓여낸 듯한 맛. &quot;맛있네. 맛있어. 근데 도연, 참 재밌지 않아?&quot;</p>
+    <p>&quot;네 뭐가 재밌으세요?&quot;</p>
+    <p>&quot;편의점에서 컵라면 먹을 때는 국물 한 방울도 아까워서 밥까지 말아 먹었는데... 4만 5천 원짜리 라면을 먹으니까, 국물을 남겨도 죄책감이 안 들어. 돈이 사람 식성까지 바꾸나 봐.&quot; 성훈은 랍스터 살을 발라내며 씁쓸하게 웃었다. 라면은 맛있었지만, 그 맛은 &#x27;라면의 맛&#x27;이 아니라 &#x27;성공의 맛&#x27;이었다. 다음 날. 경남 남해. 성훈 일행은 남쪽으로 더 깊숙이 내려갔다. 이번 목적지는 사우스케이프. 콘크리트 곡선이 춤을 추는 듯한 건축물. 절벽 위에 세워진 클럽하우스. 이곳은 리조트가 아니라 거대한 현대미술관 같았다. 성훈과 도연은 인피니티 풀 선베드에 누워 주변을 둘러보았다. 래시가드를 입은 젊은 커플들, 여유롭게 와인을 마시는 노부부, 아이들과 물장구치는 가족들. 그들의 표정에는 구김살이 없었다. 마치 태어날 때부터 이 풍경이 당연했다는 듯한 자연스러움. 성훈은 선글라스 너머로 그들을 훔쳐보았다. 265만 원짜리 패딩을 입고, 2억에 육박하는 차를 타고 왔지만, 왠지 모르게 몸에 힘이 들어갔다. 성훈은 깨달았다. 저들은 &#x27;일상&#x27;을 보내고 있지만, 자신은 &#x27;이벤트</p>
+    <p>&#x27;를 하고 있었다. 할부로 산 시간은 언젠가 끝난다. 그 불안감이 파도 소리 사이로 스며들었다.</p>
+    <p>&quot;여보.&quot; 도연이 성훈에게 샴페인 잔을 건넸다. &quot;데이터 분석 결과, 파트너님의 &#x27;소외감 수치&#x27;가 상승하고 있네요.&quot;</p>
+    <p>&quot;귀신 같네. 이런 것도 티가 나나?&quot; 성훈이 샴페인을 받으며 물었다.</p>
+    <p>&quot;네. 저들은 주변을 두리번거리지 않아요. 오직 자신들의 즐거움에만 집중하죠. 하지만 당신은 계속 타인과 자신을 비교하고 있어요. &#x27;내가 저들 틈에 껴도 되는 건가?&#x27; 하고요.&quot; 성훈은 샴페인을 단숨에 들이켰다. 탄산이 목을 따갑게 긁고 내려갔다.</p>
+    <p>&quot;그래. 뱁새가 황새 따라가려니 다리가 좀 아프긴 하지만...&quot; 성훈은 갑자기 뭔가 생각난 듯 벌떡 일어났다..</p>
+    <p>&quot;도연. 이제 한국은 됐어.&quot;</p>
+    <p>&quot;네 역시 해외 승인을 원하시는군요!&quot;</p>
+    <p>&quot;어. 이왕 럭셔리한 삶을 체험하는 거, 비행기도 누워서 가보고, 유럽에서 좋다는 곳들도 골라서 가보자. 남은 한도를 꼭 1년 동안 써야 하는건 아니잖아?&quot; 성훈은 생각했다. 다시 어딘가에서 일을 시작하면 돈이 아무리 많아도 이런 시간을 누릴 수 없다는 것을.</p>
+    <p>&quot;지금처럼 시간이 자유로울 때 해볼 수 있는걸 다 해보고 싶어&quot; 도연의 눈동자가 푸르게 빛났다.</p>
+    <p>&quot;경로를 재설정합니다. 목적지: 인천국제공항 제2터미널. 대한항공 일등석(First Class) 체크인 카운터.&quot; 성훈은 샴페인 잔을 내려놓으며 남해의 붉은 노을을 바라보았다. 아름다웠다. 하지만 옆에 진짜 사람이 아니어서일까, 그 아름다움이 조금은 시리게 느껴졌다.</p>
   </div>
   <div class="next-box">
     <p>성훈과 도연의 여정이 인천공항을 거쳐 유럽 대륙으로 확장됩니다.</p>
     <a href="free-part4.html" class="btn-next">Part 4 계속 읽기 →</a>
   </div>
 </main>
+<script>
+  const bar=document.getElementById('progress');
+  addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';});
+</script>
 </body>
 </html>
