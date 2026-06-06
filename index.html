@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,10 +9,25 @@
 <!-- SEO & 소셜 공유 -->
 <meta name="description" content="5억 한도의 메탈 카드와 욕망을 학습하는 초지능 안드로이드. 평범한 직장인 성훈의 1년, 자본주의 실험. 조일출 장편소설 · 예스24·부크크 정식 출간작.">
 <meta name="author" content="조일출">
+<meta name="keywords" content="안드로이드는 쇼핑백을 든다, 조일출, AI 소설, SF 소설, 자본주의 풍자, 근미래 소설, 초지능, 웹소설">
+<link rel="canonical" href="https://ocusun.github.io/androidshoppingbag/">
+
+<!-- Open Graph (카카오톡·페이스북·디스코드) -->
 <meta property="og:type" content="book">
 <meta property="og:title" content="안드로이드는 쇼핑백을 든다">
-<meta property="og:description" content="5억 한도의 메탈 카드와 초지능 안드로이드, 자본주의의 신과 맺은 1년짜리 영혼의 임대 계약.">
+<meta property="og:description" content="5억 한도의 메탈 카드와 초지능 안드로이드, 자본주의의 신과 맺은 1년짜리 영혼의 임대 계약. 앞부분 1/3 무료 공개.">
+<meta property="og:image" content="https://ocusun.github.io/androidshoppingbag/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ocusun.github.io/androidshoppingbag/">
+<meta property="og:site_name" content="안드로이드는 쇼핑백을 든다">
 <meta property="og:locale" content="ko_KR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="안드로이드는 쇼핑백을 든다">
+<meta name="twitter:description" content="5억 한도의 메탈 카드와 초지능 안드로이드, 자본주의의 신과 맺은 1년짜리 영혼의 임대 계약.">
+<meta name="twitter:image" content="https://ocusun.github.io/androidshoppingbag/og-image.jpg">
 
 <!-- Gumroad Overlay -->
 <script src="https://gumroad.com/js/gumroad.js"></script>
@@ -21,6 +37,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+
+<!-- 구조화 데이터 (검색엔진 책 정보) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "안드로이드는 쇼핑백을 든다",
+  "author": { "@type": "Person", "name": "조일출" },
+  "isbn": "9791112111159",
+  "bookFormat": "https://schema.org/EBook",
+  "inLanguage": "ko",
+  "datePublished": "2025-12-10",
+  "publisher": { "@type": "Organization", "name": "부크크" },
+  "description": "5억 한도의 메탈 카드와 욕망을 학습하는 초지능 안드로이드. 평범한 직장인 성훈의 1년, 자본주의 실험.",
+  "image": "https://ocusun.github.io/androidshoppingbag/og-image.jpg",
+  "genre": ["SF", "근미래", "풍자"]
+}
+</script>
 
 <style>
   :root {
@@ -35,7 +69,6 @@
   .blob.b2 { width:300px; height:300px; bottom:10%; left:-100px; background:var(--c3); }
   .wrap { max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
 
-  /* ===== 초감각적 미래형 헤더 스타일 ===== */
   header {
     position: sticky; top: 0; z-index: 50;
     background: rgba(251, 250, 246, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -59,21 +92,19 @@
   .btn-card-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 12px rgba(253, 186, 116, 0.4); border-color: rgba(253, 186, 116, 0.5); }
   .btn-card-cta span.price { font-size: 0.75rem; color: var(--c4); font-weight: 700; background: rgba(253, 186, 116, 0.15); padding: 1px 6px; border-radius: 4px; }
 
-  /* 히어로 및 레이아웃 */
+  /* 히어로 */
   .hero { padding: 80px 0 60px; text-align:center; }
+  .kicker { display:inline-block; font-size:0.75rem; font-weight:700; color:var(--ink-soft); background:var(--bg-soft); padding:6px 14px; border-radius:100px; margin-bottom:32px; }
   .hero-cover { position:relative; display:inline-block; margin-bottom:40px; }
   .hero-cover::before { content:''; position:absolute; width:80%; height:70%; top:14%; left:10%;
     background:radial-gradient(ellipse, rgba(255,122,138,0.22), rgba(167,139,250,0.18) 55%, transparent 75%); filter:blur(50px); z-index:0; }
-  .hero-cover img { position:relative; z-index:1; width:100%; max-width:auto; height:auto; border-radius:10px;
+  .hero-cover img { position:relative; z-index:1; width:100%; max-width:340px; height:auto; border-radius:10px;
     box-shadow:0 2px 6px rgba(0,0,0,0.05), 0 28px 56px -20px rgba(45,38,48,0.32), 0 50px 90px -45px rgba(167,139,250,0.22);
     transition:transform .5s cubic-bezier(0.2,0.8,0.2,1); }
   .hero-cover img:hover { transform:translateY(-8px); }
   @media (max-width:600px){ .hero-cover img { max-width:260px; } }
-  .kicker { display:inline-block; font-size:0.75rem; font-weight:700; color:var(--ink-soft); background:var(--bg-soft); padding:6px 14px; border-radius:100px; margin-bottom:32px; }
-  .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 24px; }
-  .hero h1 span { background: linear-gradient(120deg, var(--c1), var(--c4)); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .hero .logline { font-size:1.1rem; color:var(--ink-soft); max-width:600px; margin:0 auto 40px; }
-  .btn-group { display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-group { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
   .btn { display:inline-block; padding:14px 28px; border-radius:100px; text-decoration:none; font-weight:600; font-size:0.95rem; transition:0.2s; }
   .btn-primary { background:var(--ink); color:#fff; }
   .btn-secondary { background:var(--card); color:var(--ink); border:1px solid var(--line); }
@@ -94,7 +125,7 @@
   .ep-tag.free { background:#e6fffa; color:#2c7a7b; }
   .ep-tag.paid { background:#fbf0f0; color:#b83232; border:1px solid rgba(184,50,50,0.1); }
 
-  /* ===== 구매 채널 3종 ===== */
+  /* 구매 채널 3종 */
   .buy-head { text-align:center; margin-bottom:40px; }
   .buy-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
   @media (max-width:760px){ .buy-grid{ grid-template-columns:1fr; } }
@@ -116,7 +147,7 @@
   .buy-fine { text-align:center; color:var(--ink-faint); font-size:0.84rem; margin-top:30px; line-height:1.7; }
 
   footer { border-top:1px solid var(--line); padding:60px 0; text-align:center; color:var(--ink-faint); font-size:0.9rem; }
-  .book-info { margin-bottom:20px; color:var(--ink-soft); }
+  .book-info { margin-bottom:20px; color:var(--ink-soft); line-height:1.8; }
 
   @keyframes pulse {
     0% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(10,128,98,0.5); }
@@ -144,12 +175,12 @@
 </header>
 
 <div class="hero wrap">
-  <span class="kicker">근미래 AI · 자본주의 풍자 소설</span><p></p>
+  <span class="kicker">근미래 AI · 자본주의 풍자 소설</span>
   <div class="hero-cover">
-    <img src="cover.png" alt="안드로이드는 쇼핑백을 든다 — 책 표지"></p>
+    <img src="cover.png" alt="안드로이드는 쇼핑백을 든다 — 책 표지">
   </div>
   <p class="logline">6,000원짜리 식권에 존엄을 저울질당하던 직장인 성훈. 그에게 장전된 5억 한도의 메탈 카드와 욕망을 복사하는 안드로이드가 나타났다.</p>
-  <div class="btn-group" style="justify-content:center;">
+  <div class="btn-group">
     <a href="#episodes" class="btn btn-primary">무료 분량 먼저 읽기</a>
     <a href="#buy" class="btn btn-secondary">완결본 구매하기</a>
   </div>
@@ -214,7 +245,6 @@
   </div>
   <div class="buy-grid">
 
-    <!-- Gumroad: 이어보기 -->
     <div class="buy-card best">
       <div class="buy-badge">바로 이어보기</div>
       <div class="bc-kind">PREVIEW EDITION</div>
@@ -229,7 +259,6 @@
       <div class="bc-note">개인 소장용 미리보기 에디션</div>
     </div>
 
-    <!-- 예스24: 전자책 -->
     <div class="buy-card">
       <div class="bc-kind">E-BOOK</div>
       <div class="bc-name">정식 전자책</div>
@@ -243,7 +272,6 @@
       <div class="bc-note">ISBN 9791112111159</div>
     </div>
 
-    <!-- 부크크: 종이책 -->
     <div class="buy-card">
       <div class="bc-kind">PAPERBACK</div>
       <div class="bc-name">종이책</div>
@@ -264,9 +292,10 @@
 <footer>
   <div class="wrap">
     <div class="book-info">
-      <strong>안드로이드는 쇼핑백을 든다</strong>
+      <strong>안드로이드는 쇼핑백을 든다</strong><br>
       발행일: 2025년 12월 10일 | 출판사: 주식회사 부크크 · 예스24 정식 출간 (ISBN 9791112111159)
     </div>
+    <p>© 2025 JJBROS. All Rights Reserved.</p>
   </div>
 </footer>
 
