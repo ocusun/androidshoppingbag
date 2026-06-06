@@ -5,14 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>안드로이드는 쇼핑백을 든다 — 작가 조일출</title>
-
-<!-- SEO & 소셜 공유 -->
 <meta name="description" content="5억 한도의 메탈 카드와 욕망을 학습하는 초지능 안드로이드. 평범한 직장인 성훈의 1년, 자본주의 실험. 조일출 장편소설 · 예스24·부크크 정식 출간작.">
 <meta name="author" content="조일출">
 <meta name="keywords" content="안드로이드는 쇼핑백을 든다, 조일출, AI 소설, SF 소설, 자본주의 풍자, 근미래 소설, 초지능, 웹소설">
 <link rel="canonical" href="https://ocusun.github.io/androidshoppingbag/">
-
-<!-- Open Graph (카카오톡·페이스북·디스코드) -->
 <meta property="og:type" content="book">
 <meta property="og:title" content="안드로이드는 쇼핑백을 든다">
 <meta property="og:description" content="5억 한도의 메탈 카드와 초지능 안드로이드, 자본주의의 신과 맺은 1년짜리 영혼의 임대 계약. 앞부분 1/3 무료 공개.">
@@ -22,23 +18,15 @@
 <meta property="og:url" content="https://ocusun.github.io/androidshoppingbag/">
 <meta property="og:site_name" content="안드로이드는 쇼핑백을 든다">
 <meta property="og:locale" content="ko_KR">
-
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="안드로이드는 쇼핑백을 든다">
 <meta name="twitter:description" content="5억 한도의 메탈 카드와 초지능 안드로이드, 자본주의의 신과 맺은 1년짜리 영혼의 임대 계약.">
 <meta name="twitter:image" content="https://ocusun.github.io/androidshoppingbag/og-image.jpg">
-
-<!-- Gumroad Overlay -->
 <script src="https://gumroad.com/js/gumroad.js"></script>
-
-<!-- 서체 설정 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
-
-<!-- 구조화 데이터 (검색엔진 책 정보) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,7 +43,6 @@
   "genre": ["SF", "근미래", "풍자"]
 }
 </script>
-
 <style>
   :root {
     --bg: #fbfaf6; --bg-soft: #f5f3ed; --card: #ffffff; --ink: #1a1a1f; --ink-soft: #51525c; --ink-faint: #9b9ba4; --line: #ece9e1;
@@ -68,7 +55,6 @@
   .blob.b1 { width:400px; height:400px; top:-100px; right:-80px; background:var(--c1); }
   .blob.b2 { width:300px; height:300px; bottom:10%; left:-100px; background:var(--c3); }
   .wrap { max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
-
   header {
     position: sticky; top: 0; z-index: 50;
     background: rgba(251, 250, 246, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -82,7 +68,6 @@
   .nav-item { position: relative; text-decoration: none; font-size: 0.88rem; font-weight: 700; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
   .nav-item:hover { color: var(--ink); }
   .tech-tag { font-size: 0.65rem; font-weight: 800; color: var(--c3); background: rgba(167, 139, 250, 0.12); padding: 2px 6px; border-radius: 4px; letter-spacing: 0.05em; }
-
   .btn-card-cta {
     position: relative; display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 12px; text-decoration: none; font-size: 0.88rem; font-weight: 800; color: #ffffff;
     background: linear-gradient(135deg, #111115 0%, #22222b 100%); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -91,30 +76,26 @@
   .btn-card-cta::before { content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); animation: shimmer 4.5s infinite ease-in-out; }
   .btn-card-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 12px rgba(253, 186, 116, 0.4); border-color: rgba(253, 186, 116, 0.5); }
   .btn-card-cta span.price { font-size: 0.75rem; color: var(--c4); font-weight: 700; background: rgba(253, 186, 116, 0.15); padding: 1px 6px; border-radius: 4px; }
-
-  /* 히어로 */
   .hero { padding: 80px 0 60px; text-align:center; }
   .kicker { display:inline-block; font-size:0.75rem; font-weight:700; color:var(--ink-soft); background:var(--bg-soft); padding:6px 14px; border-radius:100px; margin-bottom:32px; }
-  .hero-cover { position:relative; display:inline-block; margin-bottom:40px; }
+  .hero-cover { position:relative; display:inline-block; margin-top:24px; margin-bottom:48px; }
   .hero-cover::before { content:''; position:absolute; width:80%; height:70%; top:14%; left:10%;
-    background:radial-gradient(ellipse, rgba(255,122,138,0.22), rgba(167,139,250,0.18) 55%, transparent 75%); filter:blur(50px); z-index:0; }
-  .hero-cover img { position:relative; z-index:1; width:100%; max-width:340px; height:auto; border-radius:10px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.05), 0 28px 56px -20px rgba(45,38,48,0.32), 0 50px 90px -45px rgba(167,139,250,0.22);
+    background:radial-gradient(ellipse, rgba(255,122,138,0.22), rgba(167,139,250,0.18) 55%, transparent 75%); filter:blur(60px); z-index:0; }
+  .hero-cover img { position:relative; z-index:1; width:100%; max-width:640px; height:auto; border-radius:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05), 0 32px 64px -22px rgba(45,38,48,0.34), 0 56px 100px -50px rgba(167,139,250,0.24);
     transition:transform .5s cubic-bezier(0.2,0.8,0.2,1); }
   .hero-cover img:hover { transform:translateY(-8px); }
-  @media (max-width:600px){ .hero-cover img { max-width:260px; } }
+  @media (max-width:600px){ .hero-cover img { max-width:88vw; } }
   .hero .logline { font-size:1.1rem; color:var(--ink-soft); max-width:600px; margin:0 auto 40px; }
   .btn-group { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
   .btn { display:inline-block; padding:14px 28px; border-radius:100px; text-decoration:none; font-weight:600; font-size:0.95rem; transition:0.2s; }
   .btn-primary { background:var(--ink); color:#fff; }
   .btn-secondary { background:var(--card); color:var(--ink); border:1px solid var(--line); }
   .btn:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,0.1); }
-
   section { padding: 60px 0; }
   .s-head { margin-bottom:40px; }
   .s-title { font-family: var(--serif); font-size: 2rem; margin-bottom:8px; }
   .s-sub { color:var(--ink-faint); }
-
   .ep { display:flex; align-items:center; gap:20px; padding:24px; background:var(--card); border:1px solid var(--line); border-radius:20px; margin-bottom:16px; text-decoration:none; color:inherit; transition:0.2s; }
   .ep:hover { border-color:var(--c3); transform:translateX(5px); box-shadow:0 10px 25px rgba(0,0,0,0.04); }
   .ep-num { font-family:var(--serif); font-size:1.1rem; font-weight:700; color:var(--ink-faint); min-width:65px; text-transform:uppercase; letter-spacing:0.05em; }
@@ -124,8 +105,6 @@
   .ep-tag { font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:100px; white-space:nowrap; }
   .ep-tag.free { background:#e6fffa; color:#2c7a7b; }
   .ep-tag.paid { background:#fbf0f0; color:#b83232; border:1px solid rgba(184,50,50,0.1); }
-
-  /* 구매 채널 3종 */
   .buy-head { text-align:center; margin-bottom:40px; }
   .buy-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
   @media (max-width:760px){ .buy-grid{ grid-template-columns:1fr; } }
@@ -145,22 +124,35 @@
   .bc-btn:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.1); }
   .bc-note { font-size:0.74rem; color:var(--ink-faint); margin-top:12px; }
   .buy-fine { text-align:center; color:var(--ink-faint); font-size:0.84rem; margin-top:30px; line-height:1.7; }
-
   footer { border-top:1px solid var(--line); padding:60px 0; text-align:center; color:var(--ink-faint); font-size:0.9rem; }
   .book-info { margin-bottom:20px; color:var(--ink-soft); line-height:1.8; }
-
   @keyframes pulse {
     0% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(10,128,98,0.5); }
     70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 6px rgba(10,128,98,0); }
     100% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(10,128,98,0); }
   }
   @keyframes shimmer { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
+  /* ===== 모바일 반응형 헤더 ===== */
+  @media (max-width: 600px) {
+    .nav { height: 64px; }
+    .logo { font-size: 1.1rem; }
+    .nav-links { gap: 14px; }
+    .nav-item { font-size: 0.82rem; }
+    .btn-card-cta { padding: 8px 12px; font-size: 0.78rem; gap: 5px; border-radius: 10px; }
+    .btn-card-cta span.price { font-size: 0.68rem; padding: 1px 5px; }
+    .hero { padding: 50px 0 40px; }
+    .s-title { font-size: 1.6rem; }
+  }
+  @media (max-width: 420px) {
+    .wrap { padding: 0 16px; }
+    .nav-links { gap: 10px; }
+    .nav-item { display: none; }
+    .btn-card-cta { padding: 9px 14px; }
+  }
 </style>
 </head>
 <body>
-
 <div class="blob b1"></div><div class="blob b2"></div>
-
 <header>
   <div class="wrap nav">
     <div class="logo">안드로이드<span>.</span></div>
@@ -173,11 +165,10 @@
     </nav>
   </div>
 </header>
-
 <div class="hero wrap">
-  <span class="kicker">근미래 AI · 자본주의 풍자 소설</span><p>
+  <span class="kicker">근미래 AI · 자본주의 풍자 소설</span>
   <div class="hero-cover">
-    <img src="cover.png" width=640px alt="안드로이드는 쇼핑백을 든다 — 책 표지">
+    <img src="cover.png" alt="안드로이드는 쇼핑백을 든다 — 책 표지">
   </div>
   <p class="logline">6,000원짜리 식권에 존엄을 저울질당하던 직장인 성훈. 그에게 장전된 5억 한도의 메탈 카드와 욕망을 복사하는 안드로이드가 나타났다.</p>
   <div class="btn-group">
@@ -185,13 +176,11 @@
     <a href="#buy" class="btn btn-secondary">완결본 구매하기</a>
   </div>
 </div>
-
 <section id="episodes" class="wrap">
   <div class="s-head">
     <h2 class="s-title">연재 목록</h2>
     <p class="s-sub">본 소설은 총 63화 + 에필로그 완결작입니다. 앞부분 1/3 분량(00~18화)을 4개의 파트로 나누어 전면 무료 공개합니다.</p>
   </div>
-
   <a class="ep" href="free-part1.html">
     <span class="ep-num">Part 1</span>
     <div class="ep-body">
@@ -200,7 +189,6 @@
     </div>
     <span class="ep-tag free">무료 정주행</span>
   </a>
-
   <a class="ep" href="free-part2.html">
     <span class="ep-num">Part 2</span>
     <div class="ep-body">
@@ -209,7 +197,6 @@
     </div>
     <span class="ep-tag free">무료 정주행</span>
   </a>
-
   <a class="ep" href="free-part3.html">
     <span class="ep-num">Part 3</span>
     <div class="ep-body">
@@ -218,7 +205,6 @@
     </div>
     <span class="ep-tag free">무료 정주행</span>
   </a>
-
   <a class="ep" href="free-part4.html">
     <span class="ep-num">Part 4</span>
     <div class="ep-body">
@@ -227,7 +213,6 @@
     </div>
     <span class="ep-tag free">무료 정주행</span>
   </a>
-
   <a class="ep" href="part5.html">
     <span class="ep-num" style="color:var(--ink-faint)">Part 5</span>
     <div class="ep-body">
@@ -237,14 +222,12 @@
     <span class="ep-tag paid">🔒 구매 안내 보기</span>
   </a>
 </section>
-
 <section id="buy" class="wrap">
   <div class="s-head buy-head">
     <h2 class="s-title">완결본 만나기</h2>
     <p class="s-sub">19화부터 결말까지, 세 가지 방법 중 원하는 형태로 만나보세요.</p>
   </div>
   <div class="buy-grid">
-
     <div class="buy-card best">
       <div class="buy-badge">바로 이어보기</div>
       <div class="bc-kind">PREVIEW EDITION</div>
@@ -258,7 +241,6 @@
       <a href="https://ocusunshine.gumroad.com/l/feqlua" class="bc-btn gumroad-button">완결 패스 구매</a>
       <div class="bc-note">개인 소장용 미리보기 에디션</div>
     </div>
-
     <div class="buy-card">
       <div class="bc-kind">E-BOOK</div>
       <div class="bc-name">정식 전자책</div>
@@ -271,7 +253,6 @@
       <a href="https://www.yes24.com/product/goods/170444959" target="_blank" rel="noopener" class="bc-btn">예스24에서 구매</a>
       <div class="bc-note">ISBN 9791112111159</div>
     </div>
-
     <div class="buy-card">
       <div class="bc-kind">PAPERBACK</div>
       <div class="bc-name">종이책</div>
@@ -284,11 +265,9 @@
       <a href="https://bookk.co.kr/bookStore/6944c667a59cb86b0ad6285e" target="_blank" rel="noopener" class="bc-btn">부크크에서 구매</a>
       <div class="bc-note">종이책 정식 출간본</div>
     </div>
-
   </div>
   <p class="buy-fine">완결 패스는 19화부터 이어 읽는 개인 소장용 미리보기 에디션입니다.<br>편집·교정을 거친 정식 완성본은 예스24 전자책 또는 부크크 종이책으로 만나보실 수 있습니다.</p>
 </section>
-
 <footer>
   <div class="wrap">
     <div class="book-info">
@@ -298,6 +277,5 @@
     <p>© 2025 JJBROS. All Rights Reserved.</p>
   </div>
 </footer>
-
 </body>
 </html>
