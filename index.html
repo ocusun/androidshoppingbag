@@ -1,281 +1,53 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>안드로이드는 쇼핑백을 든다 — 작가 조일출</title>
-<meta name="description" content="5억 한도의 메탈 카드와 욕망을 학습하는 초지능 안드로이드. 평범한 직장인 성훈의 1년, 자본주의 실험. 조일출 장편소설 · 예스24·부크크 정식 출간작.">
-<meta name="author" content="조일출">
-<meta name="keywords" content="안드로이드는 쇼핑백을 든다, 조일출, AI 소설, SF 소설, 자본주의 풍자, 근미래 소설, 초지능, 웹소설">
-<link rel="canonical" href="https://ocusun.github.io/androidshoppingbag/">
-<meta property="og:type" content="book">
-<meta property="og:title" content="안드로이드는 쇼핑백을 든다">
-<meta property="og:description" content="5억 한도의 메탈 카드와 초지능 안드로이드, 자본주의의 신과 맺은 1년짜리 영혼의 임대 계약. 앞부분 1/3 무료 공개.">
-<meta property="og:image" content="https://ocusun.github.io/androidshoppingbag/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://ocusun.github.io/androidshoppingbag/">
-<meta property="og:site_name" content="안드로이드는 쇼핑백을 든다">
-<meta property="og:locale" content="ko_KR">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="안드로이드는 쇼핑백을 든다">
-<meta name="twitter:description" content="5억 한도의 메탈 카드와 초지능 안드로이드, 자본주의의 신과 맺은 1년짜리 영혼의 임대 계약.">
-<meta name="twitter:image" content="https://ocusun.github.io/androidshoppingbag/og-image.jpg">
-<script src="https://gumroad.com/js/gumroad.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Book",
-  "name": "안드로이드는 쇼핑백을 든다",
-  "author": { "@type": "Person", "name": "조일출" },
-  "isbn": "9791112111159",
-  "bookFormat": "https://schema.org/EBook",
-  "inLanguage": "ko",
-  "datePublished": "2025-12-10",
-  "publisher": { "@type": "Organization", "name": "부크크" },
-  "description": "5억 한도의 메탈 카드와 욕망을 학습하는 초지능 안드로이드. 평범한 직장인 성훈의 1년, 자본주의 실험.",
-  "image": "https://ocusun.github.io/androidshoppingbag/og-image.jpg",
-  "genre": ["SF", "근미래", "풍자"]
-}
-</script>
-<style>
-  :root {
-    --bg: #fbfaf6; --bg-soft: #f5f3ed; --card: #ffffff; --ink: #1a1a1f; --ink-soft: #51525c; --ink-faint: #9b9ba4; --line: #ece9e1;
-    --c1: #ff7a8a; --c2: #5eead4; --c3: #a78bfa; --c4: #fdba74; --c5: #7dd3fc;
-    --ui: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; --serif: 'Gowun Batang', serif; --read: 'Nanum Myeongjo', serif;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background: var(--bg); color: var(--ink); font-family: var(--ui); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-  .blob { position:fixed; border-radius:50%; filter:blur(80px); opacity:0.4; z-index:0; pointer-events:none; }
-  .blob.b1 { width:400px; height:400px; top:-100px; right:-80px; background:var(--c1); }
-  .blob.b2 { width:300px; height:300px; bottom:10%; left:-100px; background:var(--c3); }
-  .wrap { max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
-  header {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(251, 250, 246, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(236, 233, 225, 0.7); transition: all 0.3s ease;
-  }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 80px; }
-  .logo { font-family: var(--serif); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 6px; }
-  .logo span { background: linear-gradient(135deg, var(--c1), var(--c3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .logo::after { content: ''; display: inline-block; width: 6px; height: 6px; background: #00ffaa; border-radius: 50%; box-shadow: 0 0 10px #00ffaa; animation: pulse 2s infinite; }
-  .nav-links { display: flex; align-items: center; gap: 32px; }
-  .nav-item { position: relative; text-decoration: none; font-size: 0.88rem; font-weight: 700; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
-  .nav-item:hover { color: var(--ink); }
-  .tech-tag { font-size: 0.65rem; font-weight: 800; color: var(--c3); background: rgba(167, 139, 250, 0.12); padding: 2px 6px; border-radius: 4px; letter-spacing: 0.05em; }
-  .btn-card-cta {
-    position: relative; display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 12px; text-decoration: none; font-size: 0.88rem; font-weight: 800; color: #ffffff;
-    background: linear-gradient(135deg, #111115 0%, #22222b 100%); border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(167, 139, 250, 0.2) inset; overflow: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .btn-card-cta::before { content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); animation: shimmer 4.5s infinite ease-in-out; }
-  .btn-card-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 12px rgba(253, 186, 116, 0.4); border-color: rgba(253, 186, 116, 0.5); }
-  .btn-card-cta span.price { font-size: 0.75rem; color: var(--c4); font-weight: 700; background: rgba(253, 186, 116, 0.15); padding: 1px 6px; border-radius: 4px; }
-  .hero { padding: 80px 0 60px; text-align:center; }
-  .kicker { display:inline-block; font-size:0.75rem; font-weight:700; color:var(--ink-soft); background:var(--bg-soft); padding:6px 14px; border-radius:100px; margin-bottom:32px; }
-  .hero-cover { position:relative; display:inline-block; margin-top:24px; margin-bottom:48px; }
-  .hero-cover::before { content:''; position:absolute; width:80%; height:70%; top:14%; left:10%;
-    background:radial-gradient(ellipse, rgba(255,122,138,0.22), rgba(167,139,250,0.18) 55%, transparent 75%); filter:blur(60px); z-index:0; }
-  .hero-cover img { position:relative; z-index:1; width:100%; max-width:640px; height:auto; border-radius:12px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.05), 0 32px 64px -22px rgba(45,38,48,0.34), 0 56px 100px -50px rgba(167,139,250,0.24);
-    transition:transform .5s cubic-bezier(0.2,0.8,0.2,1); }
-  .hero-cover img:hover { transform:translateY(-8px); }
-  @media (max-width:600px){ .hero-cover img { max-width:88vw; } }
-  .hero .logline { font-size:1.1rem; color:var(--ink-soft); max-width:600px; margin:0 auto 40px; }
-  .btn-group { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
-  .btn { display:inline-block; padding:14px 28px; border-radius:100px; text-decoration:none; font-weight:600; font-size:0.95rem; transition:0.2s; }
-  .btn-primary { background:var(--ink); color:#fff; }
-  .btn-secondary { background:var(--card); color:var(--ink); border:1px solid var(--line); }
-  .btn:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,0.1); }
-  section { padding: 60px 0; }
-  .s-head { margin-bottom:40px; }
-  .s-title { font-family: var(--serif); font-size: 2rem; margin-bottom:8px; }
-  .s-sub { color:var(--ink-faint); }
-  .ep { display:flex; align-items:center; gap:20px; padding:24px; background:var(--card); border:1px solid var(--line); border-radius:20px; margin-bottom:16px; text-decoration:none; color:inherit; transition:0.2s; }
-  .ep:hover { border-color:var(--c3); transform:translateX(5px); box-shadow:0 10px 25px rgba(0,0,0,0.04); }
-  .ep-num { font-family:var(--serif); font-size:1.1rem; font-weight:700; color:var(--ink-faint); min-width:65px; text-transform:uppercase; letter-spacing:0.05em; }
-  .ep-body { flex:1; }
-  .ep-title { font-family:var(--serif); font-weight:700; font-size:1.2rem; margin-bottom:6px; }
-  .ep-desc { color:var(--ink-soft); font-size:0.92rem; line-height:1.5; }
-  .ep-tag { font-size:0.78rem; font-weight:700; padding:6px 14px; border-radius:100px; white-space:nowrap; }
-  .ep-tag.free { background:#e6fffa; color:#2c7a7b; }
-  .ep-tag.paid { background:#fbf0f0; color:#b83232; border:1px solid rgba(184,50,50,0.1); }
-  .buy-head { text-align:center; margin-bottom:40px; }
-  .buy-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
-  @media (max-width:760px){ .buy-grid{ grid-template-columns:1fr; } }
-  .buy-card { background:var(--card); border:1px solid var(--line); border-radius:24px; padding:34px 28px; text-align:center; display:flex; flex-direction:column; position:relative; transition:0.3s; }
-  .buy-card:hover { transform:translateY(-4px); box-shadow:0 18px 40px -18px rgba(0,0,0,0.12); }
-  .buy-card.best { border:2px solid var(--c4); background:linear-gradient(to bottom, #fff, #fffef0); }
-  .buy-badge { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--c4),var(--c1)); color:#fff; font-size:0.68rem; font-weight:800; letter-spacing:0.08em; padding:6px 16px; border-radius:100px; white-space:nowrap; }
-  .bc-kind { font-size:0.72rem; font-weight:800; letter-spacing:0.1em; color:var(--ink-faint); margin-bottom:10px; }
-  .bc-name { font-family:var(--serif); font-weight:700; font-size:1.25rem; margin-bottom:14px; }
-  .bc-price { font-family:var(--serif); font-size:2.3rem; font-weight:700; margin-bottom:4px; }
-  .bc-price small { font-size:1rem; color:var(--ink-faint); font-weight:400; }
-  .bc-feat { list-style:none; text-align:left; margin:20px 0 26px; display:flex; flex-direction:column; gap:11px; flex:1; }
-  .bc-feat li { font-size:0.9rem; color:var(--ink-soft); padding-left:24px; position:relative; line-height:1.55; }
-  .bc-feat li::before { content:'✓'; position:absolute; left:0; top:0; color:#0a8062; font-weight:800; }
-  .bc-btn { display:block; padding:14px; border-radius:100px; text-decoration:none; font-weight:700; font-size:0.95rem; transition:0.2s; background:var(--bg-soft); color:var(--ink); border:1px solid var(--line); }
-  .buy-card.best .bc-btn { background:var(--ink); color:#fff; border:none; }
-  .bc-btn:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,0.1); }
-  .bc-note { font-size:0.74rem; color:var(--ink-faint); margin-top:12px; }
-  .buy-fine { text-align:center; color:var(--ink-faint); font-size:0.84rem; margin-top:30px; line-height:1.7; }
-  footer { border-top:1px solid var(--line); padding:60px 0; text-align:center; color:var(--ink-faint); font-size:0.9rem; }
-  .book-info { margin-bottom:20px; color:var(--ink-soft); line-height:1.8; }
-  @keyframes pulse {
-    0% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(10,128,98,0.5); }
-    70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 6px rgba(10,128,98,0); }
-    100% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(10,128,98,0); }
-  }
-  @keyframes shimmer { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
-  /* ===== 모바일 반응형 헤더 ===== */
-  @media (max-width: 600px) {
-    .nav { height: 64px; }
-    .logo { font-size: 1.1rem; }
-    .nav-links { gap: 14px; }
-    .nav-item { font-size: 0.82rem; }
-    .btn-card-cta { padding: 8px 12px; font-size: 0.78rem; gap: 5px; border-radius: 10px; }
-    .btn-card-cta span.price { font-size: 0.68rem; padding: 1px 5px; }
-    .hero { padding: 50px 0 40px; }
-    .s-title { font-size: 1.6rem; }
-  }
-  @media (max-width: 420px) {
-    .wrap { padding: 0 16px; }
-    .nav-links { gap: 10px; }
-    .nav-item { display: none; }
-    .btn-card-cta { padding: 9px 14px; }
-  }
-</style>
-</head>
-<body>
-<div class="blob b1"></div><div class="blob b2"></div>
-<header>
-  <div class="wrap nav">
-    <div class="logo">안드로이드<span>.</span></div>
-    <nav class="nav-links">
-      <a href="#episodes" class="nav-item">연재</a>
-      <a href="#buy" class="nav-item">구매</a>
-      <a href="https://ocusunshine.gumroad.com/l/feqlua" class="btn-card-cta gumroad-button">
-        무료패스 활성화 <span class="price">₩5,000</span>
-      </a>
-    </nav>
-  </div>
-</header>
-<div class="hero wrap">
-  <span class="kicker">근미래 AI · 자본주의 풍자 소설</span>
-  <div class="hero-cover">
-    <img src="cover.png" alt="안드로이드는 쇼핑백을 든다 — 책 표지">
-  </div>
-  <p class="logline">6,000원짜리 식권에 존엄을 저울질당하던 직장인 성훈. 그에게 장전된 5억 한도의 메탈 카드와 욕망을 복사하는 안드로이드가 나타났다.</p>
-  <div class="btn-group">
-    <a href="#episodes" class="btn btn-primary">무료 분량 먼저 읽기</a>
-    <a href="#buy" class="btn btn-secondary">완결본 구매하기</a>
-  </div>
-</div>
-<section id="episodes" class="wrap">
-  <div class="s-head">
-    <h2 class="s-title">연재 목록</h2>
-    <p class="s-sub">본 소설은 총 63화 + 에필로그 완결작입니다. 앞부분 1/3 분량(00~18화)을 4개의 파트로 나누어 전면 무료 공개합니다.</p>
-  </div>
-  <a class="ep" href="free-part1.html">
-    <span class="ep-num">Part 1</span>
-    <div class="ep-body">
-      <div class="ep-title">욕망의 탄생과 첫 번째 전투복 (00화 ~ 04화)</div>
-      <div class="ep-desc">깜부치킨의 기적과 5억 한도 카드의 등장. 성훈은 자신의 존엄을 식권으로 계산하는 이들에게 사직서를 던지고 265만 원짜리 명품 패딩과 시계로 외피를 바꾸기 시작한다.</div>
-    </div>
-    <span class="ep-tag free">무료 정주행</span>
-  </a>
-  <a class="ep" href="free-part2.html">
-    <span class="ep-num">Part 2</span>
-    <div class="ep-body">
-      <div class="ep-title">콘크리트 쇼핑백과 취향의 계급 (05화 ~ 09화)</div>
-      <div class="ep-desc">국회도서관의 소음 유발자를 지나 마트의 서민적 공간에서 누리는 최상위 사치. 성훈은 무너진 자존감을 치유하기 위해 월세 350만 원의 한강뷰 오피스텔과 수천만 원의 가구 조명으로 공간을 채운다.</div>
-    </div>
-    <span class="ep-tag free">무료 정주행</span>
-  </a>
-  <a class="ep" href="free-part3.html">
-    <span class="ep-num">Part 3</span>
-    <div class="ep-body">
-      <div class="ep-title">도로 위의 계급장과 질주의 쾌락 (10화 ~ 13화)</div>
-      <div class="ep-desc">K5 렌터카를 벗어나 도산대로의 포식자인 포르쉐 카이엔을 60개월 할부로 출고하는 레버리지의 미학. 아난티 코브와 사우스케이프 절벽 위 요새에서 4만 5천 원짜리 랍스터 라면을 먹으며 성공을 연출한다.</div>
-    </div>
-    <span class="ep-tag free">무료 정주행</span>
-  </a>
-  <a class="ep" href="free-part4.html">
-    <span class="ep-num">Part 4</span>
-    <div class="ep-body">
-      <div class="ep-title">구름 위의 침실과 도파민의 종말 (14화 ~ 18화)</div>
-      <div class="ep-desc">대한항공 일등석, 파리 리츠 호텔, 에르메스 버킨백 환불 소동과 미슐랭 쓰리스타의 숨 막히는 공허함. 마터호른 설산에서 우주의 설계자를 묻던 성훈은 마침내 쾌락 적응을 겪고 모든 소유를 비워내기로 결심한다.</div>
-    </div>
-    <span class="ep-tag free">무료 정주행</span>
-  </a>
-  <a class="ep" href="part5.html">
-    <span class="ep-num" style="color:var(--ink-faint)">Part 5</span>
-    <div class="ep-body">
-      <div class="ep-title" style="color:var(--ink-soft)">현실 사회 시스템의 리모델링 (19화 ~ 완결)</div>
-      <div class="ep-desc">100억의 한도가 풀리며 시작되는 MIR 프로젝트. 미디어 미르의 팩트 폭격, 어반 마이너 노인 카트 보급, 로펌 태산 압살, 가와사키 오진 교정 및 국회 예산 전수조사 칼질이 시작됩니다.</div>
-    </div>
-    <span class="ep-tag paid">🔒 구매 안내 보기</span>
-  </a>
-</section>
-<section id="buy" class="wrap">
-  <div class="s-head buy-head">
-    <h2 class="s-title">완결본 만나기</h2>
-    <p class="s-sub">19화부터 결말까지, 세 가지 방법 중 원하는 형태로 만나보세요.</p>
-  </div>
-  <div class="buy-grid">
-    <div class="buy-card best">
-      <div class="buy-badge">바로 이어보기</div>
-      <div class="bc-kind">PREVIEW EDITION</div>
-      <div class="bc-name">완결 패스</div>
-      <div class="bc-price">5,000<small>원</small></div>
-      <ul class="bc-feat">
-        <li>19화~결말 + 에필로그</li>
-        <li>결제 후 PDF 즉시 발급</li>
-        <li>지금 사이트에서 바로 이어보기</li>
-      </ul>
-      <a href="https://ocusunshine.gumroad.com/l/feqlua" class="bc-btn gumroad-button">완결 패스 구매</a>
-      <div class="bc-note">개인 소장용 미리보기 에디션</div>
-    </div>
-    <div class="buy-card">
-      <div class="bc-kind">E-BOOK</div>
-      <div class="bc-name">정식 전자책</div>
-      <div class="bc-price">5,900<small>원</small></div>
-      <ul class="bc-feat">
-        <li>예스24 정식 출간</li>
-        <li>DRM 보호 · 영구 소장</li>
-        <li>크레마 · 앱 · PC 지원</li>
-      </ul>
-      <a href="https://www.yes24.com/product/goods/170444959" target="_blank" rel="noopener" class="bc-btn">예스24에서 구매</a>
-      <div class="bc-note">ISBN 9791112111159</div>
-    </div>
-    <div class="buy-card">
-      <div class="bc-kind">PAPERBACK</div>
-      <div class="bc-name">종이책</div>
-      <div class="bc-price">소장용</div>
-      <ul class="bc-feat">
-        <li>부크크 정식 출간본</li>
-        <li>실물 도서로 소장</li>
-        <li>선물하기 좋은 완성본</li>
-      </ul>
-      <a href="https://bookk.co.kr/bookStore/6944c667a59cb86b0ad6285e" target="_blank" rel="noopener" class="bc-btn">부크크에서 구매</a>
-      <div class="bc-note">종이책 정식 출간본</div>
-    </div>
-  </div>
-  <p class="buy-fine">완결 패스는 19화부터 이어 읽는 개인 소장용 미리보기 에디션입니다.<br>편집·교정을 거친 정식 완성본은 예스24 전자책 또는 부크크 종이책으로 만나보실 수 있습니다.</p>
-</section>
-<footer>
-  <div class="wrap">
-    <div class="book-info">
-      <strong>안드로이드는 쇼핑백을 든다</strong><br>
-      발행일: 2025년 12월 10일 | 출판사: 주식회사 부크크 · 예스24 정식 출간 (ISBN 9791112111159)
-    </div>
-    <p>© 2025 JJBROS. All Rights Reserved.</p>
-  </div>
-</footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f0eadf" />
+    <meta
+      name="description"
+      content="5억 원짜리 카드와 인간보다 인간 같은 안드로이드. K-TEXT 첫 번째 오리지널 소설 10화와 웹툰 파일럿을 무료로 읽어보세요."
+    />
+    <meta
+      name="keywords"
+      content="K-TEXT, 안드로이드는 쇼핑백을 든다, 한국 웹소설, SF 소설, 웹툰, AI 풍자"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="K-TEXT" />
+    <meta property="og:title" content="K-TEXT — 안드로이드는 쇼핑백을 든다" />
+    <meta
+      property="og:description"
+      content="소비에만 쓸 수 있는 5억 원과 인간의 욕망을 학습하는 안드로이드. 소설 10화와 웹툰 파일럿 무료 공개."
+    />
+    <meta
+      property="og:url"
+      content="https://ocusun.github.io/androidshoppingbag/"
+    />
+    <meta
+      property="og:image"
+      content="https://ocusun.github.io/androidshoppingbag/webtoon/character-master.webp"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://ocusun.github.io/androidshoppingbag/" />
+    <link rel="icon" href="%BASE_URL%favicon.svg" />
+    <title>K-TEXT — 안드로이드는 쇼핑백을 든다</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CreativeWorkSeries",
+        "name": "안드로이드는 쇼핑백을 든다",
+        "inLanguage": "ko",
+        "genre": ["Science fiction", "Social satire", "Web novel"],
+        "author": { "@type": "Person", "name": "조일출" },
+        "publisher": { "@type": "Organization", "name": "K-TEXT" },
+        "url": "https://ocusun.github.io/androidshoppingbag/",
+        "isAccessibleForFree": true
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
