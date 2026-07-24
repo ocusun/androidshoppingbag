@@ -29,7 +29,9 @@ npm run dev
 npm run build
 ```
 
-`main` 브랜치에 반영되면 GitHub Actions가 빌드한 뒤 GitHub Pages에 배포합니다.
+`npm run build`는 `dist/`를 만든 뒤 현재 저장소의 Pages 설정과 호환되는
+정적 파일을 저장소 루트에도 동기화합니다. `main` 브랜치에 반영되면
+GitHub Actions 배포와 브랜치 기반 Pages 배포 모두 같은 화면을 제공합니다.
 
 ## 저작권
 
